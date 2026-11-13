@@ -25,13 +25,12 @@ The first `npm test` on a new machine needs a browser: `npx playwright install c
 
 ## Deploy (Cloudflare)
 
-1. Cloudflare dashboard → Workers & Pages → Create → connect this GitHub repo.
-2. Framework preset **Astro**, build command `npm run build`, output directory `dist`.
-3. Add the environment variable `PUBLIC_GA4_ID` (your GA4 measurement ID) for production.
-4. Add the custom domain `raymond.sg`.
-5. Email: Cloudflare → Email → Email Routing → route `hello@raymond.sg` to your Gmail.
+The site runs as the Cloudflare Worker `raymond-sg` (Workers & Pages), connected to this GitHub repo. Every push to `main` builds (`npm run build`) and deploys automatically, including the weekly CNET stats update.
 
-Every push to `main` then deploys automatically, including the weekly CNET stats update.
+- Build variables (Worker → Settings → Build → Variables and secrets): `PUBLIC_GA4_ID`. These are read at build time, so rebuild after changing one.
+- Domains (Worker → Domains): `raymond.sg`; `www.raymond.sg` redirects to it.
+- Email: Cloudflare Email Routing sends `hello@raymond.sg` to Gmail.
+- Cloudflare builds do not wait for GitHub CI, so run the checks above before pushing to `main`.
 
 ## Automation
 
