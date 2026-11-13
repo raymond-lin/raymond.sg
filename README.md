@@ -25,15 +25,15 @@ The first `npm test` on a new machine needs a browser: `npx playwright install c
 
 ## Deploy (Cloudflare)
 
-Full step-by-step (Cloudflare, GA4, domain, email) is in `BUILD-TASKS.md` under "Launch". In short:
+The site runs as a Cloudflare Worker serving the static build (`wrangler.jsonc` points it at `dist/`). Full step-by-step (Cloudflare, GA4, domain, email) is in `BUILD-TASKS.md` under "Launch". In short:
 
-1. Cloudflare dashboard → Workers & Pages → Create application → **Pages** tab → import this GitHub repo.
-2. Framework preset **Astro**, build command `npm run build`, output directory `dist`.
-3. Add the environment variables `PUBLIC_GA4_ID` (GA4 measurement ID, production only) and `NODE_VERSION=22`.
-4. Add the custom domain `raymond.sg`.
-5. Email: Cloudflare → Email → Email Routing → route `hello@raymond.sg` to your Gmail.
+1. Cloudflare dashboard → Workers & Pages → Create application → Import a repository → this GitHub repo.
+2. Project name `raymond-sg` (must match `wrangler.jsonc`), build command `npm run build`, deploy command `npx wrangler deploy`.
+3. Build variables: `PUBLIC_GA4_ID` (GA4 measurement ID) and `NODE_VERSION=22`.
+4. Worker → Settings → Domains & Routes → add the custom domains `raymond.sg` and `www.raymond.sg`.
+5. Email: Cloudflare → Email → Email Routing → `hello@raymond.sg` goes to Gmail (done).
 
-Every push to `main` then deploys automatically, including the weekly CNET stats update.
+Every push to `main` then deploys automatically, including the weekly CNET stats update. To try the Worker locally: `npm run build && npx wrangler dev`.
 
 ## Automation
 

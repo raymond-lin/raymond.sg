@@ -17,58 +17,55 @@
 ## Launch (Cloudflare + GA4 + email)
 
 Do 1 to 3 in order. Step 4 (email) is done.
-Before starting, make sure `main` has the latest site and CI is green: Cloudflare deploys `main` to production.
+Before starting, make sure `main` has the latest site (including `wrangler.jsonc`) and CI is green: Cloudflare deploys `main` to production.
 
-### 1. Connect the repo in Cloudflare (Pages)
+### 1. Connect the repo in Cloudflare (Workers)
 
-`main` already has the full site (initial site + CI commit), so production can be built from it today.
+Cloudflare's "Create an app" flow now creates a **Worker** that serves the built site as static files. The repo has a `wrangler.jsonc` for this (Worker name `raymond-sg`, serves `dist/`, unknown URLs get the site's 404 page). **`wrangler.jsonc` must be on `main` before you click Deploy.** Without it, `wrangler deploy` tries to auto-configure Astro during the build, which can be unpredictable.
 
-**1a. Start a Pages project (Cloudflare)**
-- [ ] Sign in at dash.cloudflare.com and pick your account (the one that holds the `raymond.sg` zone).
-- [ ] Left sidebar → **Workers & Pages** (in the newer sidebar it sits under **Compute**).
-- [ ] Click **Create application** (top right).
-- [ ] Choose the **Pages** tab. If you only see "Import a repository" / "Start with Hello World" (that's the Workers flow), scroll to the bottom and click **Looking to deploy Pages? Get started**.
-      Why Pages: the Workers flow would need a `wrangler` config file this repo doesn't have, and it doesn't offer the Astro preset screen below.
-- [ ] Under **Import an existing Git repository**, click **Get started**.
-      Don't pick "Drag and drop your files" / "Upload assets": a Direct Upload project can never be switched to Git later, you'd have to delete it and start again.
+**1a. Start the app**
+- [ ] dash.cloudflare.com → your account → **Workers & Pages** (under **Compute** in the newer sidebar) → **Create application**.
+- [ ] Select a method: **Import a repository** (or "Continue with GitHub").
 
 **1b. Install the Cloudflare app on GitHub (one-off)**
-- [ ] On the **GitHub** tab, click **Connect GitHub**. A GitHub window opens (allow pop-ups for dash.cloudflare.com if nothing appears).
-- [ ] Sign in to GitHub as `raymond-lin` if asked (plus 2FA).
-- [ ] GitHub shows **Install & Authorize Cloudflare Workers and Pages**:
-  - Install on: your personal account `raymond-lin`
-  - Repository access: **Only select repositories** → **Select repositories** → type `raymond.sg` → pick it
-  - Permissions shown: read access to code and metadata; read and write to checks, deployments and pull requests (that's how it posts build status and preview links). That's expected.
-  - Click **Install & Authorize**. GitHub may ask for your password or 2FA again ("Confirm access").
-- [ ] You land back on Cloudflare with your GitHub account selected.
+- [ ] Click **Connect GitHub** (or **+ Add account**). A GitHub window opens (allow pop-ups for dash.cloudflare.com if nothing appears).
+- [ ] Sign in as `raymond-lin` if asked, with 2FA.
+- [ ] On **Install & Authorize Cloudflare Workers and Pages**:
+  - Install on your personal account `raymond-lin`
+  - Repository access: **Only select repositories** → `raymond.sg`
+  - The permissions it asks for (read code; write checks, deployments, pull requests) are how it posts build status and preview links. That's expected.
+  - **Install & Authorize**, then confirm your password or 2FA if GitHub asks.
+- [ ] Back in Cloudflare, **Select a repository**: `raymond-lin/raymond.sg` → **Next**.
+- [ ] Repo not in the list? GitHub → avatar → **Settings** → **Applications** → **Installed GitHub Apps** → **Cloudflare Workers and Pages** → **Configure** → add `raymond.sg` → **Save**, then refresh the Cloudflare page.
 
-**1c. Pick the repo**
-- [ ] Under **Select a repository**, choose `raymond.sg` → **Begin setup**.
-- [ ] Repo not in the list? GitHub → avatar → **Settings** → **Applications** → **Installed GitHub Apps** → **Cloudflare Workers and Pages** → **Configure** → Repository access → add `raymond.sg` → **Save**. Then refresh the Cloudflare page (or click **+ Add account** and pick `raymond-lin` again).
+**1c. Set up your application (the "Create and deploy" screen)**
+- [ ] Project name: `raymond-sg` (must match `name` in `wrangler.jsonc`, or builds fail)
+- [ ] Build command: `npm run build` (the field says Optional; it isn't for this site)
+- [ ] Deploy command: leave `npx wrangler deploy`
+- [ ] Preview command: leave the default
+- [ ] **Enable Preview builds**: turn **off** for now. The build variable below applies to every build, so previews would send GA4 hits from a `workers.dev` address. You can turn it on later (Settings → Build) if you want a URL per branch.
+- [ ] **Protect with Cloudflare Access**: leave off.
+- [ ] Open **Advanced settings**:
+  - Path: leave `/`
+  - API token: leave **Create new token**; keep the suggested name (or call it `raymond-sg builds`). Cloudflare creates it for the build to deploy with.
+  - Variable name `PUBLIC_GA4_ID`, value `G-83W1EJHLHE`
+  - If there's a way to add another row: `NODE_VERSION` = `22` (same as CI). If not, add it after the first deploy (below).
+- [ ] **Deploy**. Watch the log: `npm run build` → "Complete!", then `wrangler deploy` → "Read 36 files from the assets directory" (or similar) and "Deployed raymond-sg".
 
-**1d. Build settings**
-- [ ] Set up builds and deployments:
-  - Project name: `raymond-sg` (gives `raymond-sg.pages.dev`)
-  - Production branch: `main`
-  - Framework preset: **Astro** (fills build command `npm run build` and output directory `dist`)
-  - Root directory: leave blank
-  - **Environment variables (advanced)**, so the first build already has analytics:
-    - `PUBLIC_GA4_ID` = `G-83W1EJHLHE` (type: Text, not Secret; it ends up in the page source anyway)
-    - `NODE_VERSION` = `22` (same as CI)
-- [ ] **Save and Deploy**. The build log should end with "Success: Your site was deployed!". Open `https://raymond-sg.pages.dev` and check the page renders, both themes work and screenshots load.
-- [ ] Settings → **Variables and Secrets**: confirm `PUBLIC_GA4_ID` is set for **Production** only. Remove it from **Preview** if it's there, so branch previews don't send analytics. Keep `NODE_VERSION` in both.
-- [ ] Settings → **Builds** → **Branch control**: leave "Automatic deployments" on for `main`. Preview deployments for other branches are fine to keep (each gets its own `*.raymond-sg.pages.dev` URL).
-
-**1e. Check the connection works**
-- [ ] Cloudflare: project → **Settings** → **Builds** → **Git repository** shows `raymond-lin/raymond.sg`, production branch `main`.
-- [ ] GitHub: open the repo → latest commit on `main` → the status icon next to it lists a **Cloudflare Pages** check (alongside the CI workflow). Its "Details" link opens the Cloudflare build log.
-- [ ] Push any branch (e.g. this `claude/...` branch): Cloudflare builds a preview at `https://<branch>.raymond-sg.pages.dev` (slashes in the branch name become dashes; the exact URL is in the build's details). On a pull request, the Cloudflare app also comments with the preview link.
+**1d. After the first deploy**
+- [ ] Open the `https://raymond-sg.<your-subdomain>.workers.dev` link from the deploy screen. Check the page renders, both themes work and screenshots load.
+- [ ] Check GA4 got into the build: on that page, View Source and search for `G-83W1EJHLHE`.
+      Not there? The variable went in as a runtime variable, which Astro can't see. Go to the Worker → **Settings** → **Build** → **Variables and secrets** → **Add**: `PUBLIC_GA4_ID` = `G-83W1EJHLHE` (and `NODE_VERSION` = `22`). Then **Deployments** → **View build history** → **Retry build** (or push any commit to `main`).
+      Build variables live under **Settings → Build**, not under the Worker's top-level "Variables and Secrets" (those are for server code, which this site doesn't have).
+- [ ] Settings → **Build** → **Git repository** shows `raymond-lin/raymond.sg`; **Branch control** production branch is `main`.
+- [ ] GitHub: the latest commit on `main` shows a **Workers Builds: raymond-sg** check next to the CI check. "Details" opens the Cloudflare build log.
 
 Notes:
-- `PUBLIC_*` variables are baked in at build time. After adding or changing one, redeploy: Deployments → latest production deployment → **⋯** → **Retry deployment**.
+- `PUBLIC_*` variables are baked in at build time. After changing one, rebuild (Retry build, or push to `main`).
 - Every push to `main` deploys automatically, including the weekly CNET stats commit (bot commits trigger Cloudflare too).
-- Cloudflare builds on its own and does **not** wait for the GitHub CI workflow. A push to `main` that fails tests still deploys if `npm run build` succeeds. So keep running `npm run check && npm run build && npm test` before pushing to `main`, or merge through pull requests and only merge when CI is green. (Making GitHub enforce that with branch protection on a private repo needs GitHub Pro.)
-- To change or remove the link later: Cloudflare project → Settings → Builds → Git repository → **Manage**. To revoke access from the GitHub side: Settings → Applications → Installed GitHub Apps → Cloudflare Workers and Pages → Configure.
+- Cloudflare builds on its own and does **not** wait for the GitHub CI workflow. A push to `main` that fails tests still deploys if the build succeeds. So keep running `npm run check && npm run build && npm test` before pushing to `main`, or merge through pull requests and only merge when CI is green. (Making GitHub enforce that with branch protection on a private repo needs GitHub Pro.)
+- Test the Worker locally: `npm run build && npx wrangler dev`, then open http://localhost:8787.
+- To change or remove the link later: Worker → Settings → Build → Git repository → **Manage**. To revoke from the GitHub side: Settings → Applications → Installed GitHub Apps → Cloudflare Workers and Pages → Configure.
 
 ### 2. GA4 (measurement ID `G-83W1EJHLHE`)
 Cloudflare side is done in step 1 (`PUBLIC_GA4_ID`). Everything below is in analytics.google.com → **Admin** (gear, bottom left).
@@ -95,10 +92,12 @@ Cloudflare side is done in step 1 (`PUBLIC_GA4_ID`). Everything below is in anal
 The `raymond.sg` zone is already on Cloudflare (Email Routing for raymond@ works), so this is all in the same dashboard.
 - [ ] Back up DNS first: zone `raymond.sg` → **DNS** → **Records** → **Import and Export** → **Export**.
 - [ ] Note any existing **A / AAAA / CNAME** records on `raymond.sg` (@) and `www`. Those are the only ones that change. Do **not** touch MX, TXT (SPF, DMARC, `brevo-code`), or the DKIM records (`cf2024-1._domainkey`, `brevo1._domainkey`, `brevo2._domainkey` or similar): they run your email.
-- [ ] Workers & Pages → `raymond-sg` → **Custom domains** → **Set up a custom domain** → `raymond.sg` → Continue → **Activate domain**.
-      If an old apex A/AAAA/CNAME record exists, Cloudflare asks to replace it; delete that record only. Cloudflare then adds a proxied CNAME `raymond.sg → raymond-sg.pages.dev`.
+- [ ] If DNS has an old A, AAAA or CNAME record on `raymond.sg` (@) or `www`, delete just those records first. Cloudflare won't attach a Worker to a hostname that already has one.
+- [ ] Workers & Pages → `raymond-sg` → **Settings** → **Domains & Routes** → **+ Add** → **Custom domain** → `raymond.sg` → **Add domain**.
+      Cloudflare creates the DNS record itself (it shows in DNS → Records as type "Worker") and issues the certificate.
 - [ ] Repeat for `www.raymond.sg` (gives `www` a proxied record and a certificate, needed for the redirect below).
-- [ ] Wait for both domains to show **Active** (SSL certificate issued, usually a few minutes).
+- [ ] Wait for both to show as active in Domains & Routes (usually a few minutes).
+- [ ] Optional, once raymond.sg works: same page → **workers.dev** → **Disable**, so the site only lives at raymond.sg. (Every page's canonical URL already points at `https://raymond.sg`, so leaving it on is harmless.)
 - [ ] Redirect `www` to the bare domain: zone `raymond.sg` → **Rules** → **Overview** → **Create rule** → **Redirect Rule** → template **Redirect from WWW to root** → Deploy.
       (Manual version: when hostname equals `www.raymond.sg`, dynamic URL `concat("https://raymond.sg", http.request.uri.path)`, status 301, preserve query string on.)
 - [ ] **SSL/TLS** → **Edge Certificates** → **Always Use HTTPS**: On.
@@ -110,7 +109,6 @@ The `raymond.sg` zone is already on Cloudflare (Email Routing for raymond@ works
   - `https://raymond.sg/does-not-exist` shows the site's 404 page
   - Email to raymond@raymond.sg still arrives (proves MX and SPF weren't touched)
 
-`raymond-sg.pages.dev` stays reachable. That's fine: every page's canonical URL points at `https://raymond.sg`.
 
 ### 4. Route hello@raymond.sg to Gmail (done)
 Short answer: **only Cloudflare is required** to receive hello@ mail. Gmail is needed only if you want to label it and **reply as** hello@. Brevo usually needs nothing, because it authenticates the whole domain, not single addresses.
