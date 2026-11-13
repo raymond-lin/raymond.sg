@@ -12,6 +12,14 @@ export interface EnterpriseItem {
 
 export const enterprise: EnterpriseItem[] = [
   {
+    category: 'CRM & ERP',
+    title: 'Release pipelines for Salesforce and Business Central',
+    summary:
+      'Supported the Salesforce project through go-live, and connected both Salesforce and Business Central to GitLab CI/CD and Jira, so each change can be traced from its ticket through to deployment.',
+    role: 'Supported go-live, set up CI/CD and Jira integration',
+    platforms: 'Salesforce · Business Central · GitLab · Jira',
+  },
+  {
     category: 'E-commerce',
     title: 'A regional D2C store, replatformed',
     summary:
@@ -19,7 +27,6 @@ export const enterprise: EnterpriseItem[] = [
     role: 'Set up with the vendor, then led the migration',
     platforms: 'SAP Commerce Cloud → Shopline',
     scope: 'SG · MY · TH · TW · HK',
-    stat: { value: '61%', label: 'lower annual platform costs (approx.)' },
   },
   {
     category: 'ITSM',

@@ -25,8 +25,6 @@
 - [ ] 9toFIRE case study page at `/work/9tofire/` (Problem, My role, Stack, One hard technical decision, Result, Screenshots, Links), then link it from the card
 - [ ] raym0nd.com redirect: keep the Pro purchase pages working before redirecting anything
 
-- [ ] Enterprise work: confirm the drafted lines in `src/data/enterprise.ts`; add Salesforce and Business Central once their scope and role are written up
-
 ## Later
 - [ ] Writing section: articles collection + RSS; publish here first, then import to Medium so its canonical points back
 - [ ] Move the Windows software pages from WordPress to raymond.sg/software/… with redirects
