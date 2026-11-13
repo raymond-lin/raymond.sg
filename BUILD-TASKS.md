@@ -39,8 +39,10 @@ Do these after the site is public, so the checks below see real visits.
   - Name `Contact method`, Scope **Event**, Event parameter `method` → Save
 - How to check: both appear in the Custom dimensions list. They fill in only for events after they were created, and show in reports within about 24 to 48 hours.
 
-**Key events**
-- [ ] Admin → **Data display** → **Key events** → **New key event** → type `contact` → Save. Repeat for `download` and `outbound`. Names are lowercase and must match exactly.
+**Key events (optional)**
+Events are recorded either way (Reports → Engagement → Events). Marking one as a key event only adds it to the "Key events" columns, so reports can show which traffic source or page leads to it. Only matters if you want that breakdown, or ever run Google Ads.
+- [ ] Recommended: mark just `contact` (someone wanting to email you). Admin → **Data display** → **Key events** → **New key event** → type `contact` → Save. Lowercase, exact match.
+- [ ] Optional: `download` too, if downloads of the Windows apps matter to you. `outbound` (any project link click) is too broad to be worth it.
 - How to check:
   1. Admin → Data display → **Events**: after a day, `contact`, `download` and `outbound` are listed with the **Mark as key event** star/toggle on.
   2. Reports → **Engagement** → **Key events** (or the "Key events" column in Reports → Acquisition) shows counts the day after you click them.
