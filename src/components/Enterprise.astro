@@ -1,0 +1,31 @@
+---
+import { enterprise } from '../data/enterprise';
+---
+<section id="enterprise" class="scroll-mt-24 py-14 sm:py-20 lg:py-24 border-b border-monolith-line dark:border-monolith-darkLine">
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between pb-12 gap-4">
+    <div>
+      <p class="eyebrow mb-2">Enterprise work</p>
+      <h2 class="text-3xl sm:text-4xl font-medium tracking-tight">Platforms I've delivered</h2>
+    </div>
+    <p class="text-xs uppercase tracking-editorial muted">With vendor teams, across Asia-Pacific</p>
+  </div>
+  <ol class="border-t-2 border-monolith-ink dark:border-[#E8E6DF]">
+    {enterprise.map((e, i) => (
+      <li class="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-4 py-8 border-b border-monolith-line dark:border-monolith-darkLine">
+        <p class="lg:col-span-12 xl:col-span-2 eyebrow xl:pt-1.5 whitespace-nowrap">{String(i + 1).padStart(2, '0')} / {e.category}</p>
+        <div class="lg:col-span-7 xl:col-span-6">
+          <h3 class="text-xl sm:text-2xl font-semibold tracking-tight mb-2">{e.title}</h3>
+          <p class="text-sm muted leading-relaxed">{e.summary}</p>
+          {e.stat && (
+            <p class="stat !mb-0 mt-5"><span class="stat-value">{e.stat.value}</span><span class="stat-label">{e.stat.label}</span></p>
+          )}
+        </div>
+        <dl class="lg:col-span-5 xl:col-span-4 spec self-start">
+          <div><dt>Role</dt><dd>{e.role}</dd></div>
+          <div><dt>Platforms</dt><dd>{e.platforms}</dd></div>
+          {e.scope && <div><dt>Scope</dt><dd>{e.scope}</dd></div>}
+        </dl>
+      </li>
+    ))}
+  </ol>
+</section>

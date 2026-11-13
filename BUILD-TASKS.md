@@ -12,6 +12,7 @@
 - [x] Sitemap, robots.txt, canonical URL, favicon, 404 page
 - [x] CI: type check, build, Playwright smoke tests (desktop + phone, links, dashes rule, theme, logo scroll)
 - [x] CLAUDE.md with content and design rules
+- [x] Enterprise work section, mobile menu, privacy page (GA4, 14-month retention, no banner)
 
 ## Next
 - [ ] Cloudflare: connect repo, set `PUBLIC_GA4_ID`, add raymond.sg domain (see README)
@@ -23,6 +24,8 @@
 - [ ] Open Graph share image (1200×630)
 - [ ] 9toFIRE case study page at `/work/9tofire/` (Problem, My role, Stack, One hard technical decision, Result, Screenshots, Links), then link it from the card
 - [ ] raym0nd.com redirect: keep the Pro purchase pages working before redirecting anything
+
+- [ ] Enterprise work: confirm the drafted lines in `src/data/enterprise.ts`; add Salesforce and Business Central once their scope and role are written up
 
 ## Later
 - [ ] Writing section: articles collection + RSS; publish here first, then import to Medium so its canonical points back

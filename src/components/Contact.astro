@@ -3,16 +3,15 @@ import { site } from '../data/site';
 const reasons = [
   { title: 'Roles', body: 'Solutions architecture, engineering leadership or hands-on full-stack work.' },
   { title: 'Collaborations', body: "Web apps, browser extensions or developer tools you'd like a second builder on." },
-  { title: 'Questions about a project', body: 'Curious how something here was built? Happy to walk you through it.' },
+  { title: 'Questions about a project', body: 'Curious how something here was built? Happy to chat.' },
 ];
-const analyticsOn = Boolean(import.meta.env.PUBLIC_GA4_ID);
 ---
 <footer id="contact" class="scroll-mt-24 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
     <div class="lg:col-span-6 space-y-6">
       <p class="eyebrow">Say hello</p>
       <h2 class="text-3xl sm:text-5xl font-semibold tracking-tight leading-[1.08]">Have something worth building? <span class="font-serif italic font-normal muted">Let's talk.</span></h2>
-      <p class="text-base muted max-w-md leading-relaxed">I'm always happy to hear about a role on your team, a project to collaborate on, or platforms that need to talk to each other. Tell me what you're working on and where you think I could help.</p>
+      <p class="text-base muted max-w-md leading-relaxed">I'm always happy to hear about a role on your team or a project to collaborate on. Tell me what you're working on and where you think I could help.</p>
       <div class="pt-2 flex flex-wrap items-center gap-3">
         <a class="inline-flex items-center gap-2.5 min-h-[44px] text-lg sm:text-xl font-medium accent-text hover:underline underline-offset-4 font-mono" href={`mailto:${site.email}`} data-track="contact" data-project="email_click">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="1.5"></rect><path d="m3.5 6 8.5 7 8.5-7"></path></svg>
@@ -32,9 +31,11 @@ const analyticsOn = Boolean(import.meta.env.PUBLIC_GA4_ID);
       </ul>
       <div class="mt-10 flex flex-col sm:flex-row justify-between gap-2 text-[11px] tracking-editorial uppercase muted">
         <span>{site.name} · Singapore</span>
-        <span>raymond.sg</span>
+        <span class="flex items-center gap-4">
+          <span>raymond.sg</span>
+          <a class="inline-flex items-center min-h-[44px] -my-3 hover:text-monolith-accentHover dark:hover:text-[#FB923C] underline-offset-4 hover:underline" href="/privacy/">Privacy</a>
+        </span>
       </div>
-      {analyticsOn && <p class="mt-4 text-[11px] muted">This site uses Google Analytics to count visits.</p>}
     </div>
   </div>
 </footer>
