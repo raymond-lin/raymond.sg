@@ -19,7 +19,10 @@ const fitClass = p.screenshotFit === 'contain' ? 'shot shot-contain' : 'shot';
 <article class="work-card">
   <figure class={p.screenshot || p.screenshotUrl ? fitClass : `${fitClass} is-missing`}>
     {p.screenshot && (
-      <Image src={p.screenshot} alt={p.screenshotAlt} widths={[640, 960, 1280]} sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" />
+      <Image class={p.screenshotDark ? 'dark:hidden' : undefined} src={p.screenshot} alt={p.screenshotAlt} widths={[640, 960, 1280]} sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" />
+    )}
+    {p.screenshot && p.screenshotDark && (
+      <Image class="hidden dark:block" src={p.screenshotDark} alt={p.screenshotAlt} widths={[640, 960, 1280]} sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" />
     )}
     {!p.screenshot && p.screenshotUrl && (
       <img src={p.screenshotUrl} alt={p.screenshotAlt} loading="lazy" onerror="this.parentElement.classList.add('is-missing')" />

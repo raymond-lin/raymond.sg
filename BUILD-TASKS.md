@@ -17,6 +17,7 @@
 - [x] GA4 (`G-83W1EJHLHE`) in the production build and seen in Realtime; GA4 admin settings done (key events skipped on purpose: events are still recorded under Reports → Engagement → Events)
 - [x] hello@raymond.sg routed to Gmail (Cloudflare Email Routing)
 - [x] Enterprise work section, mobile menu, privacy page (GA4, 14-month retention, no banner)
+- [x] Project screenshots follow the site theme (light and dark pairs for AI Verdict, Lyricsdecode, Decide A Place)
 
 ## Launch follow-ups
 
@@ -28,6 +29,7 @@ raymond.sg currently redirects visitors to a Cloudflare Access sign-in page (`ra
 - [ ] While there: **Settings** → **Build** → **Branch control**: decide on preview builds. If on, previews (with GA4) build for every branch, including `claude/...` ones.
 
 ## Next
+- [ ] 9toFIRE: add a dark screenshot (`screenshotDark`) once 9tofire.com is public; it is behind Cloudflare Access, so visitors clicking Visit hit a sign-in page
 - [ ] Email & Text Hash Generator: download its screenshot from WordPress into `src/assets/projects/` and switch `screenshotUrl` to `screenshot`
 - [ ] First run of "Update CNET stats" from the Actions tab; check the log for warnings (CNET may block bots)
 - [ ] Check before launch: 9toFIRE sends no user inputs to a server, and MD5 & SHA works fully offline (the Principles card says so)

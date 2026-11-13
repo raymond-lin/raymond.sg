@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 test('home page renders the key sections', async ({ page }) => {
   await expect(page).toHaveTitle(/Raymond Lin/);
   await expect(page.locator('h1')).toContainText('I deliver enterprise systems across APAC');
-  for (const id of ['about', 'enterprise', 'work', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
+  for (const id of ['about', 'enterprise', 'projects', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
   await expect(page.locator('article.work-card')).toHaveCount(6);
 });
 
@@ -69,4 +69,18 @@ test('logo scrolls to top without leaving a hash in the URL', async ({ page }) =
   await page.locator('#home-link').click();
   await page.waitForFunction(() => window.scrollY === 0);
   expect(new URL(page.url()).hash).toBe('');
+});
+
+test('project screenshots follow the theme', async ({ page }) => {
+  const card = page.locator('article.work-card', { hasText: 'Lyricsdecode' });
+  for (const scheme of ['light', 'dark'] as const) {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.evaluate(() => { try { localStorage.removeItem('theme'); } catch {} });
+    await page.reload();
+    await card.scrollIntoViewIfNeeded();
+    const shown = card.locator('figure img:visible');
+    await expect(shown).toHaveCount(1);
+    const src = (await shown.getAttribute('src')) ?? '';
+    expect(src.includes('-dark'), `${scheme}: ${src}`).toBe(scheme === 'dark');
+  }
 });
