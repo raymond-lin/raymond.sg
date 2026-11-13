@@ -15,7 +15,7 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 - Site name, email, helpers (`floorLabel`, `shortDate`): `src/data/site.ts`
 - CNET stats for the MD5 & SHA Checksum Utility: `src/data/cnet.json`, refreshed weekly by `.github/workflows/cnet-stats.yml`
 - Styles: Tailwind 3 (`tailwind.config.cjs`) plus component classes in `src/styles/global.css` (`.muted`, `.accent-text`, `.eyebrow`, `.work-card`, `.chip`, ...)
-- Hosting: Cloudflare Worker with static assets, config in `wrangler.jsonc` (deploys `main` via Workers Builds)
+- Hosting: Cloudflare Worker `raymond-sg`, connected to GitHub; every push to `main` deploys (see README)
 - Original design reference: `docs/design-reference.html`
 - Open work: `BUILD-TASKS.md`
 
