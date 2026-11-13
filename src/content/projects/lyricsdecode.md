@@ -11,6 +11,7 @@ specs:
   - { label: Hosting, value: Vercel }
 stackLine: "Next.js · MDX · Vercel"
 screenshot: ../../assets/projects/lyricsdecode.png
+screenshotDark: ../../assets/projects/lyricsdecode-dark.png
 screenshotAlt: "Lyricsdecode home page listing the latest song explainers"
 link: { label: Visit, href: "https://lyricsdecode.com/" }
 ---

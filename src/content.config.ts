@@ -14,6 +14,7 @@ const projects = defineCollection({
       specs: z.array(z.object({ label: z.string(), value: z.string() })),
       stackLine: z.string(),
       screenshot: image().optional(), // local file in src/assets/projects
+      screenshotDark: image().optional(), // same framing, shown when the site is in dark mode
       screenshotUrl: z.string().url().optional(), // remote fallback until self-hosted
       screenshotAlt: z.string(),
       screenshotFit: z.enum(['cover', 'contain']).default('cover'),

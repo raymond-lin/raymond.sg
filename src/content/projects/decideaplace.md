@@ -9,6 +9,7 @@ specs:
   - { label: Framework, value: "React · Vite" }
 stackLine: "React · Vite · Google Maps"
 screenshot: ../../assets/projects/decideaplace.png
+screenshotDark: ../../assets/projects/decideaplace-dark.png
 screenshotAlt: "Decide A Place search screen with place categories"
 link: { label: Visit, href: "https://decideaplace.com/" }
 ---
