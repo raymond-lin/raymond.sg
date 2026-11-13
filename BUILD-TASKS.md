@@ -12,16 +12,41 @@
 - [x] Sitemap, robots.txt, canonical URL, favicon, 404 page
 - [x] CI: type check, build, Playwright smoke tests (desktop + phone, links, dashes rule, theme, copy button)
 - [x] CLAUDE.md with content and design rules
+- [x] hello@raymond.sg routed to Gmail (Cloudflare Email Routing), steps kept below under Launch step 4
 
 ## Launch (Cloudflare + GA4 + email)
 
-Do 1 to 3 in order. Step 4 (email) is independent and can be done any time.
+Do 1 to 3 in order. Step 4 (email) is done.
 Before starting, make sure `main` has the latest site and CI is green: Cloudflare deploys `main` to production.
 
 ### 1. Connect the repo in Cloudflare (Pages)
-- [ ] Cloudflare dashboard → **Workers & Pages** → **Create application** → **Pages** tab → **Import an existing Git repository**.
-      The default Create screen builds a Worker. Use the Pages tab (or the "Looking to deploy Pages? Get started" link at the bottom): a Worker would need a `wrangler` config this repo doesn't have.
-- [ ] **Connect GitHub**. In the GitHub app install, pick **Only select repositories** → `raymond.sg` (it's private, so Cloudflare needs this grant).
+
+`main` already has the full site (initial site + CI commit), so production can be built from it today.
+
+**1a. Start a Pages project (Cloudflare)**
+- [ ] Sign in at dash.cloudflare.com and pick your account (the one that holds the `raymond.sg` zone).
+- [ ] Left sidebar → **Workers & Pages** (in the newer sidebar it sits under **Compute**).
+- [ ] Click **Create application** (top right).
+- [ ] Choose the **Pages** tab. If you only see "Import a repository" / "Start with Hello World" (that's the Workers flow), scroll to the bottom and click **Looking to deploy Pages? Get started**.
+      Why Pages: the Workers flow would need a `wrangler` config file this repo doesn't have, and it doesn't offer the Astro preset screen below.
+- [ ] Under **Import an existing Git repository**, click **Get started**.
+      Don't pick "Drag and drop your files" / "Upload assets": a Direct Upload project can never be switched to Git later, you'd have to delete it and start again.
+
+**1b. Install the Cloudflare app on GitHub (one-off)**
+- [ ] On the **GitHub** tab, click **Connect GitHub**. A GitHub window opens (allow pop-ups for dash.cloudflare.com if nothing appears).
+- [ ] Sign in to GitHub as `raymond-lin` if asked (plus 2FA).
+- [ ] GitHub shows **Install & Authorize Cloudflare Workers and Pages**:
+  - Install on: your personal account `raymond-lin`
+  - Repository access: **Only select repositories** → **Select repositories** → type `raymond.sg` → pick it
+  - Permissions shown: read access to code and metadata; read and write to checks, deployments and pull requests (that's how it posts build status and preview links). That's expected.
+  - Click **Install & Authorize**. GitHub may ask for your password or 2FA again ("Confirm access").
+- [ ] You land back on Cloudflare with your GitHub account selected.
+
+**1c. Pick the repo**
+- [ ] Under **Select a repository**, choose `raymond.sg` → **Begin setup**.
+- [ ] Repo not in the list? GitHub → avatar → **Settings** → **Applications** → **Installed GitHub Apps** → **Cloudflare Workers and Pages** → **Configure** → Repository access → add `raymond.sg` → **Save**. Then refresh the Cloudflare page (or click **+ Add account** and pick `raymond-lin` again).
+
+**1d. Build settings**
 - [ ] Set up builds and deployments:
   - Project name: `raymond-sg` (gives `raymond-sg.pages.dev`)
   - Production branch: `main`
@@ -34,9 +59,16 @@ Before starting, make sure `main` has the latest site and CI is green: Cloudflar
 - [ ] Settings → **Variables and Secrets**: confirm `PUBLIC_GA4_ID` is set for **Production** only. Remove it from **Preview** if it's there, so branch previews don't send analytics. Keep `NODE_VERSION` in both.
 - [ ] Settings → **Builds** → **Branch control**: leave "Automatic deployments" on for `main`. Preview deployments for other branches are fine to keep (each gets its own `*.raymond-sg.pages.dev` URL).
 
+**1e. Check the connection works**
+- [ ] Cloudflare: project → **Settings** → **Builds** → **Git repository** shows `raymond-lin/raymond.sg`, production branch `main`.
+- [ ] GitHub: open the repo → latest commit on `main` → the status icon next to it lists a **Cloudflare Pages** check (alongside the CI workflow). Its "Details" link opens the Cloudflare build log.
+- [ ] Push any branch (e.g. this `claude/...` branch): Cloudflare builds a preview at `https://<branch>.raymond-sg.pages.dev` (slashes in the branch name become dashes; the exact URL is in the build's details). On a pull request, the Cloudflare app also comments with the preview link.
+
 Notes:
 - `PUBLIC_*` variables are baked in at build time. After adding or changing one, redeploy: Deployments → latest production deployment → **⋯** → **Retry deployment**.
-- Every push to `main` deploys automatically, including the weekly CNET stats commit.
+- Every push to `main` deploys automatically, including the weekly CNET stats commit (bot commits trigger Cloudflare too).
+- Cloudflare builds on its own and does **not** wait for the GitHub CI workflow. A push to `main` that fails tests still deploys if `npm run build` succeeds. So keep running `npm run check && npm run build && npm test` before pushing to `main`, or merge through pull requests and only merge when CI is green. (Making GitHub enforce that with branch protection on a private repo needs GitHub Pro.)
+- To change or remove the link later: Cloudflare project → Settings → Builds → Git repository → **Manage**. To revoke access from the GitHub side: Settings → Applications → Installed GitHub Apps → Cloudflare Workers and Pages → Configure.
 
 ### 2. GA4 (measurement ID `G-83W1EJHLHE`)
 Cloudflare side is done in step 1 (`PUBLIC_GA4_ID`). Everything below is in analytics.google.com → **Admin** (gear, bottom left).
@@ -80,40 +112,40 @@ The `raymond.sg` zone is already on Cloudflare (Email Routing for raymond@ works
 
 `raymond-sg.pages.dev` stays reachable. That's fine: every page's canonical URL points at `https://raymond.sg`.
 
-### 4. Route hello@raymond.sg to Gmail
+### 4. Route hello@raymond.sg to Gmail (done)
 Short answer: **only Cloudflare is required** to receive hello@ mail. Gmail is needed only if you want to label it and **reply as** hello@. Brevo usually needs nothing, because it authenticates the whole domain, not single addresses.
 
 **A. Cloudflare (required: receiving)**
-- [ ] Zone `raymond.sg` → **Email** → **Email Routing** → **Routing rules** → **Custom addresses** → **Create address**.
+- [x] Zone `raymond.sg` → **Email** → **Email Routing** → **Routing rules** → **Custom addresses** → **Create address**.
   - Custom address: `hello`
   - Action: **Send to an email**
   - Destination: the same Gmail already used for raymond@ (already verified, so no new confirmation email)
   - Save, and check the rule shows **Active**.
-- [ ] Don't change any DNS records: the MX and SPF records added for raymond@ cover every address on the domain.
-- [ ] Leave the **Catch-all** rule disabled or set to Drop (catch-alls attract spam).
-- [ ] Test from a **different** account (a phone mail app, Outlook, a friend). Gmail often hides mail you send to yourself through a forward, so a test from the same Gmail can look like a failure.
+- [x] Don't change any DNS records: the MX and SPF records added for raymond@ cover every address on the domain.
+- [x] Leave the **Catch-all** rule disabled or set to Drop (catch-alls attract spam).
+- [x] Test from a **different** account (a phone mail app, Outlook, a friend). Gmail often hides mail you send to yourself through a forward, so a test from the same Gmail can look like a failure.
       Email Routing → **Overview** → activity log should show the message as "Forwarded".
 
 **B. Gmail (optional: label it and reply as hello@)**
-- [ ] Label: Gmail search bar → **Show search options** → To: `hello@raymond.sg` → **Create filter** → Apply the label `raymond.sg/hello`, tick **Never send it to Spam** → Create.
-- [ ] Settings (gear) → **See all settings** → **Accounts and Import** → **Send mail as**. First click **edit info** on the existing raymond@raymond.sg entry and note its SMTP settings.
-- [ ] **Add another email address**:
+- [x] Label: Gmail search bar → **Show search options** → To: `hello@raymond.sg` → **Create filter** → Apply the label `raymond.sg/hello`, tick **Never send it to Spam** → Create.
+- [x] Settings (gear) → **See all settings** → **Accounts and Import** → **Send mail as**. First click **edit info** on the existing raymond@raymond.sg entry and note its SMTP settings.
+- [x] **Add another email address**:
   - Name: Raymond Lin, Email: `hello@raymond.sg`, **Treat as an alias**: ticked → Next
   - SMTP Server: `smtp-relay.brevo.com`, Port: `587`
   - Username: your Brevo SMTP login (Brevo → **SMTP & API** → **SMTP** tab; looks like `xxxxxx@smtp-brevo.com`, not your Gmail)
   - Password: a Brevo SMTP key. Reusing the raymond@ key works; generating a new one named `gmail-hello` lets you revoke either separately.
   - **Secured connection using TLS** → Add Account
-- [ ] Gmail sends a confirmation code to hello@raymond.sg. It arrives in your Gmail through the route from part A (so do A first). Click the link or paste the code.
-- [ ] Back in **Send mail as** → "When replying to a message": select **Reply from the same address the message was sent to**.
-- [ ] Test: reply to the test message from part A, choosing hello@ as From. On the receiving side, open the message → **Show original** (Gmail) or view headers: SPF, DKIM and DMARC should all say **PASS**.
+- [x] Gmail sends a confirmation code to hello@raymond.sg. It arrives in your Gmail through the route from part A (so do A first). Click the link or paste the code.
+- [x] Back in **Send mail as** → "When replying to a message": select **Reply from the same address the message was sent to**.
+- [x] Test: reply to the test message from part A, choosing hello@ as From. On the receiving side, open the message → **Show original** (Gmail) or view headers: SPF, DKIM and DMARC should all say **PASS**.
 
 **C. Brevo (only if sending from hello@ fails)**
-- [ ] Brevo → **Senders, Domains & Dedicated IPs** → **Domains**: `raymond.sg` should show **Authenticated**. If so, hello@ can already send; nothing to do.
-- [ ] If Gmail's SMTP step or a test send is rejected with a sender error, go to **Senders** → **Add sender** → `hello@raymond.sg`, then confirm with the code (it arrives via part A).
-- [ ] The Brevo free plan's daily sending limit is shared by raymond@ and hello@. Fine for personal mail.
+- [x] Brevo → **Senders, Domains & Dedicated IPs** → **Domains**: `raymond.sg` should show **Authenticated**. If so, hello@ can already send; nothing to do.
+- [x] If Gmail's SMTP step or a test send is rejected with a sender error, go to **Senders** → **Add sender** → `hello@raymond.sg`, then confirm with the code (it arrives via part A).
+- [x] The Brevo free plan's daily sending limit is shared by raymond@ and hello@. Fine for personal mail.
 
 **DNS sanity check (one-off)**
-- [ ] DNS → Records, filter by TXT on `raymond.sg`: there must be exactly **one** record starting `v=spf1`. If both Cloudflare and Brevo are listed, they go in that same record (e.g. `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all`). Two separate `v=spf1` records make SPF fail for both. Since raymond@ already sends and receives fine, this is most likely correct already.
+- [x] DNS → Records, filter by TXT on `raymond.sg`: there must be exactly **one** record starting `v=spf1`. If both Cloudflare and Brevo are listed, they go in that same record (e.g. `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all`). Two separate `v=spf1` records make SPF fail for both. Since raymond@ already sends and receives fine, this is most likely correct already.
 
 ## Next
 - [ ] Email & Text Hash Generator: download its screenshot from WordPress into `src/assets/projects/` and switch `screenshotUrl` to `screenshot`
