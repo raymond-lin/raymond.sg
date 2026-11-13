@@ -14,27 +14,14 @@ themeBtn?.addEventListener('click', () => {
   syncLabel();
 });
 
-// Copy email button.
-const copyBtn = document.getElementById('copy-email');
-copyBtn?.addEventListener('click', async () => {
-  const email = copyBtn.dataset.email ?? '';
-  const done = () => {
-    copyBtn.textContent = 'Copied';
-    const status = document.getElementById('copy-status');
-    if (status) status.textContent = 'Email address copied';
-    setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
-    track('contact', { method: 'email_copy' });
-  };
-  try {
-    await navigator.clipboard.writeText(email);
-    done();
-  } catch {
-    const t = document.createElement('textarea');
-    t.value = email; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
-    document.body.appendChild(t); t.select();
-    try { document.execCommand('copy'); done(); } catch { /* give up quietly */ }
-    t.remove();
-  }
+// Logo: on the home page, scroll to the top and clear any #section from the URL
+// instead of reloading. On other pages it is a normal link home.
+document.getElementById('home-link')?.addEventListener('click', (e) => {
+  if (location.pathname !== '/') return;
+  e.preventDefault();
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  if (location.hash) history.replaceState(null, '', '/');
 });
 
 // Analytics events for project links and email clicks (no-op when GA4 is off).

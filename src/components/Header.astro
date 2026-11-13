@@ -4,13 +4,10 @@ import { site } from '../data/site';
 <header class="sticky top-0 z-50 bg-monolith-canvas/95 dark:bg-monolith-darkCanvas/95 border-b border-monolith-line dark:border-monolith-darkLine">
   <div class="max-w-[1360px] mx-auto px-5 sm:px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between gap-4">
     <div class="flex items-center gap-4 sm:gap-6 min-w-0">
-      <a class="group flex items-center gap-3 min-w-0" href="/#top" aria-label="Raymond Lin, back to top">
+      <a class="group flex items-center gap-3 min-w-0" id="home-link" href="/" aria-label="Raymond Lin, home">
         <span class="shrink-0 w-8 h-8 rounded-sm bg-monolith-ink dark:bg-white text-white dark:text-monolith-ink flex items-center justify-center font-mono font-bold text-xs tracking-wider transition-colors group-hover:bg-monolith-accent dark:group-hover:bg-monolith-accent dark:group-hover:text-white">RL</span>
         <span class="flex flex-col min-w-0">
-          <span class="flex items-center gap-2 whitespace-nowrap">
-            <span class="text-sm font-semibold tracking-tight uppercase">{site.name}</span>
-            <span class="hidden sm:inline text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-orange-50 dark:bg-neutral-800 text-[#9A3412] dark:text-[#FB923C]">raymond.sg</span>
-          </span>
+          <span class="text-sm font-semibold tracking-tight uppercase whitespace-nowrap">{site.name}</span>
           <span class="hidden sm:block text-[10px] tracking-looseCap muted uppercase font-medium whitespace-nowrap">{site.role}</span>
         </span>
       </a>

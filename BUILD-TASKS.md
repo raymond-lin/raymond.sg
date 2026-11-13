@@ -7,10 +7,10 @@
 - [x] Self-hosted fonts (Fontsource)
 - [x] Light/dark theme (system default, remembered)
 - [x] Real screenshots: 9toFIRE, AI Verdict, Lyricsdecode, Decide A Place, MD5 & SHA (optimised to WebP at build)
-- [x] GA4 wiring (loads only when `PUBLIC_GA4_ID` is set) with events for Visit / Download / email clicks and copy
+- [x] GA4 wiring (loads only when `PUBLIC_GA4_ID` is set) with events for Visit / Download / email clicks
 - [x] CNET stats data file + weekly GitHub Action; badge hides if not top 3
 - [x] Sitemap, robots.txt, canonical URL, favicon, 404 page
-- [x] CI: type check, build, Playwright smoke tests (desktop + phone, links, dashes rule, theme, copy button)
+- [x] CI: type check, build, Playwright smoke tests (desktop + phone, links, dashes rule, theme, logo scroll)
 - [x] CLAUDE.md with content and design rules
 
 ## Next

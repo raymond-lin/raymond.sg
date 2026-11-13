@@ -1,12 +1,12 @@
 export const site = {
   name: 'Raymond Lin',
-  role: 'Solutions Architect & Engineering Lead',
+  role: 'Solutions Architect · Full-stack Engineer',
   url: 'https://raymond.sg',
   email: 'hello@raymond.sg',
-  title: 'Raymond Lin · Solutions Architect & Engineering Lead',
+  title: 'Raymond Lin, Solutions Architect & Full-stack Engineer',
   description:
     'Raymond Lin, Singapore. Business systems across Asia-Pacific markets, plus web apps, browser extensions and Windows tools he builds and runs himself.',
-  ogDescription: 'Enterprise platforms across APAC, and production software I build and operate myself.',
+  ogDescription: 'I deliver enterprise systems across APAC, and build and run software of my own.',
 };
 
 /** Round a count down to a figure that stays true as it grows: 836,024 -> "800,000+". */

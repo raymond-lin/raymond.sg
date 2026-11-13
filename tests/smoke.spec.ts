@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 
 test('home page renders the key sections', async ({ page }) => {
   await expect(page).toHaveTitle(/Raymond Lin/);
-  await expect(page.locator('h1')).toContainText('I architect and deliver complex systems');
+  await expect(page.locator('h1')).toContainText('I deliver enterprise systems across APAC');
   for (const id of ['about', 'work', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
   await expect(page.locator('article.work-card')).toHaveCount(6);
 });
@@ -44,9 +44,10 @@ test('theme toggle switches and is remembered', async ({ page }) => {
   expect(await isDark()).toBe(!before);
 });
 
-test('copy email button confirms', async ({ page, context, browserName }) => {
-  test.skip(browserName !== 'chromium', 'clipboard permission is Chromium-only in Playwright');
-  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  await page.locator('#copy-email').click();
-  await expect(page.locator('#copy-email')).toHaveText('Copied');
+test('logo scrolls to top without leaving a hash in the URL', async ({ page }) => {
+  await page.goto('/#contact');
+  await page.waitForFunction(() => window.scrollY > 0);
+  await page.locator('#home-link').click();
+  await page.waitForFunction(() => window.scrollY === 0);
+  expect(new URL(page.url()).hash).toBe('');
 });
