@@ -10,8 +10,8 @@ specs:
   - { label: Language, value: VB.NET }
   - { label: Store, value: "AWS serverless, event-driven" }
 stackLine: "VB.NET · .NET · AWS"
-screenshot: ../../assets/projects/md5-sha.jpg
+screenshot: ../../assets/projects/md5-sha-pro.png
 screenshotFit: contain
-screenshotAlt: "MD5 & SHA Checksum Utility main window hashing a file"
+screenshotAlt: "MD5 & SHA Checksum Utility Pro hashing a file with every supported algorithm, from CRC32 to BLAKE3"
 link: { label: Download, href: "https://raylin.wordpress.com/downloads/md5-sha-1-checksum-utility/" }
 ---

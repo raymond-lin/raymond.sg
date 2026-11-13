@@ -35,8 +35,6 @@
   .stat { @apply flex items-baseline gap-3 mb-6 -mt-2; }
   .stat-value { @apply font-serif italic text-4xl accent-text leading-none; }
   .stat-label { @apply text-xs uppercase tracking-editorial muted; }
-  .fit-row { @apply flex gap-5 py-5 border-t border-monolith-line dark:border-monolith-darkLine; }
-  .fit-num { @apply font-mono text-xs accent-text pt-1 w-6 shrink-0; }
   .badge { @apply inline-flex items-center gap-2 px-3 py-2 min-h-[36px] rounded-sm border border-monolith-accent/40 dark:border-[#FB923C]/40 bg-orange-50 dark:bg-[#2A1E16] text-xs font-medium text-[#9A3412] dark:text-[#FDBA74] hover:border-monolith-accent transition-colors; }
 }
 
