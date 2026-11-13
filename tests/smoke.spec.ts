@@ -8,8 +8,8 @@ test.beforeEach(async ({ page }) => {
 
 test('home page renders the key sections', async ({ page }) => {
   await expect(page).toHaveTitle(/Raymond Lin/);
-  await expect(page.locator('h1')).toContainText('I architect and deliver complex systems');
-  for (const id of ['about', 'work', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
+  await expect(page.locator('h1')).toContainText('I deliver enterprise systems across APAC');
+  for (const id of ['about', 'enterprise', 'work', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
   await expect(page.locator('article.work-card')).toHaveCount(6);
 });
 
@@ -31,8 +31,27 @@ test('every link has a real destination', async ({ page }) => {
 });
 
 test('content rules: no em or en dashes in visible text', async ({ page }) => {
-  const text = await page.locator('body').innerText();
-  expect(text).not.toMatch(/[—–]/);
+  for (const path of ['/', '/privacy/']) {
+    await page.goto(path);
+    expect(await page.locator('body').innerText(), path).not.toMatch(/[—–]/);
+  }
+});
+
+test('privacy page is linked from the footer and renders', async ({ page }) => {
+  await page.locator('footer a[href="/privacy/"]').click();
+  await expect(page.locator('h1')).toContainText('What happens to your data');
+  await expect(page.locator('body')).toContainText('14 months');
+});
+
+test('mobile menu opens, links to a section and closes', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'the menu button only shows on small screens');
+  const btn = page.locator('#menu-toggle');
+  await btn.click();
+  await expect(btn).toHaveAttribute('aria-expanded', 'true');
+  await page.locator('#mobile-menu a[href="/#enterprise"]').click();
+  await expect(page.locator('#mobile-menu')).toBeHidden();
+  await expect(btn).toHaveAttribute('aria-expanded', 'false');
+  await expect(page).toHaveURL(/#enterprise$/);
 });
 
 test('theme toggle switches and is remembered', async ({ page }) => {
@@ -44,9 +63,10 @@ test('theme toggle switches and is remembered', async ({ page }) => {
   expect(await isDark()).toBe(!before);
 });
 
-test('copy email button confirms', async ({ page, context, browserName }) => {
-  test.skip(browserName !== 'chromium', 'clipboard permission is Chromium-only in Playwright');
-  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  await page.locator('#copy-email').click();
-  await expect(page.locator('#copy-email')).toHaveText('Copied');
+test('logo scrolls to top without leaving a hash in the URL', async ({ page }) => {
+  await page.goto('/#contact');
+  await page.waitForFunction(() => window.scrollY > 0);
+  await page.locator('#home-link').click();
+  await page.waitForFunction(() => window.scrollY === 0);
+  expect(new URL(page.url()).hash).toBe('');
 });

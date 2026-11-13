@@ -12,9 +12,12 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 ## Where things live
 - Projects: one Markdown file per project in `src/content/projects/` (schema in `src/content.config.ts`). Order with `order`. Screenshots in `src/assets/projects/`.
 - Tools & platforms list: `src/data/tools.ts`
+- Enterprise work (platforms delivered, no employer names or dates): `src/data/enterprise.ts`
+- Privacy page: `src/pages/privacy.astro` (update it if analytics, hosting or data retention change)
 - Site name, email, helpers (`floorLabel`, `shortDate`): `src/data/site.ts`
 - CNET stats for the MD5 & SHA Checksum Utility: `src/data/cnet.json`, refreshed weekly by `.github/workflows/cnet-stats.yml`
 - Styles: Tailwind 3 (`tailwind.config.cjs`) plus component classes in `src/styles/global.css` (`.muted`, `.accent-text`, `.eyebrow`, `.work-card`, `.chip`, ...)
+- Hosting: Cloudflare Worker `raymond-sg`, connected to GitHub; every push to `main` deploys (see README)
 - Original design reference: `docs/design-reference.html`
 - Open work: `BUILD-TASKS.md`
 

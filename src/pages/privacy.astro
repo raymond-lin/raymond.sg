@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import { site, shortDate } from '../data/site';
+
+const updated = '2026-11-13';
+const link = 'accent-text underline underline-offset-4 hover:no-underline';
+---
+<Base title={`Privacy · ${site.name}`} description="How raymond.sg handles visitor data: Google Analytics, your theme choice, hosting and email.">
+  <Header />
+  <main id="main" class="max-w-[1360px] mx-auto px-5 sm:px-6 lg:px-12">
+    <article class="max-w-2xl py-14 sm:py-20 lg:py-24">
+      <p class="eyebrow mb-2">Privacy</p>
+      <h1 class="text-3xl sm:text-5xl font-medium tracking-tight mb-4">What happens to your data here</h1>
+      <p class="text-sm muted mb-12">Last updated {shortDate(updated)}</p>
+
+      <div class="space-y-10 leading-relaxed [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:mb-3 [&_p]:muted [&_p+p]:mt-3 [&_ul+p]:mt-3 [&_ul]:muted [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1.5 [&_ul]:mt-3">
+        <section>
+          <p>This is my personal site. It has no accounts, no forms and no ads. This page explains the little data it does handle.</p>
+        </section>
+
+        <section>
+          <h2>Analytics</h2>
+          <p>I use Google Analytics 4 to understand how many people visit and which pages and links they use. It sets cookies (named <code class="font-mono text-sm">_ga</code> and <code class="font-mono text-sm">_ga_</code> followed by an ID) to tell new visits from repeat ones. Google collects things like:</p>
+          <ul>
+            <li>the pages you view and the site that sent you here</li>
+            <li>your approximate location (country and city)</li>
+            <li>your device type, browser and screen size</li>
+            <li>clicks on project links, downloads and my email address</li>
+          </ul>
+          <p>Google says Analytics 4 does not log or store IP addresses. I only look at totals and trends, and I don't combine this data with anything else. Google keeps it for 14 months and then deletes it. Google may process it on servers outside Singapore; see <a class={link} href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from sites that use its services</a>.</p>
+        </section>
+
+        <section>
+          <h2>Turning analytics off</h2>
+          <p>The site works the same without analytics. You can block cookies in your browser settings, use a content blocker, or install <a class={link} href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google's opt-out browser add-on</a>.</p>
+        </section>
+
+        <section>
+          <h2>Your theme choice</h2>
+          <p>If you switch between light and dark, your choice is saved in your own browser's local storage so the site remembers it. It stays on your device and is never sent anywhere.</p>
+        </section>
+
+        <section>
+          <h2>Hosting</h2>
+          <p>The site is hosted on Cloudflare, which handles each request (including your IP address) to deliver the pages and protect the site from attacks. See <a class={link} href="https://www.cloudflare.com/privacypolicy/" rel="noopener">Cloudflare's privacy policy</a>.</p>
+        </section>
+
+        <section>
+          <h2>Email</h2>
+          <p>Messages to {site.email} are forwarded to my personal inbox. If you email me, I use your address and message only to reply, and I don't share them with anyone.</p>
+        </section>
+
+        <section>
+          <h2>Other sites</h2>
+          <p>Project and download links take you to other sites, which have their own privacy policies.</p>
+        </section>
+
+        <section>
+          <h2>Your rights</h2>
+          <p>Under Singapore's Personal Data Protection Act (PDPA) you can ask what personal data I hold about you, ask me to correct it, or withdraw your consent. Email <a class={link} href={`mailto:${site.email}`} data-track="contact" data-project="privacy_email">{site.email}</a> and I'll reply within 30 days.</p>
+        </section>
+      </div>
+
+      <p class="mt-14"><a class="arrow-link" href="/">Back to home</a></p>
+    </article>
+  </main>
+</Base>
