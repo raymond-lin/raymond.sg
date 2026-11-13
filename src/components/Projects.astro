@@ -4,7 +4,7 @@ import ProjectCard from './ProjectCard.astro';
 
 const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
 ---
-<section id="work" class="scroll-mt-24 py-14 sm:py-20 lg:py-24 border-b border-monolith-line dark:border-monolith-darkLine">
+<section id="projects" class="scroll-mt-24 py-14 sm:py-20 lg:py-24 border-b border-monolith-line dark:border-monolith-darkLine">
   <div class="flex flex-col sm:flex-row sm:items-end justify-between pb-12 gap-4">
     <div>
       <p class="eyebrow mb-2">Own projects</p>

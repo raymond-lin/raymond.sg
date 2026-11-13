@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 test('home page renders the key sections', async ({ page }) => {
   await expect(page).toHaveTitle(/Raymond Lin/);
   await expect(page.locator('h1')).toContainText('I deliver enterprise systems across APAC');
-  for (const id of ['about', 'enterprise', 'work', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
+  for (const id of ['about', 'enterprise', 'projects', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
   await expect(page.locator('article.work-card')).toHaveCount(6);
 });
 
