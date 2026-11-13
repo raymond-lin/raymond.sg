@@ -17,7 +17,8 @@
 - [x] GA4 (`G-83W1EJHLHE`) in the production build and seen in Realtime; GA4 admin settings done (key events skipped on purpose: events are still recorded under Reports → Engagement → Events)
 - [x] hello@raymond.sg routed to Gmail (Cloudflare Email Routing)
 - [x] Enterprise work section, mobile menu, privacy page (GA4, 14-month retention, no banner)
-- [x] Project screenshots follow the site theme (light and dark pairs for AI Verdict, Lyricsdecode, Decide A Place)
+- [x] Project screenshots follow the site theme (light and dark pairs for Lyricsdecode and Decide A Place)
+- [x] Pro screenshots for MD5 & SHA Checksum Utility (3.0 Pro) and Email & Text Hash Generator (1.0 Pro), stored in the repo
 
 ## Launch follow-ups
 
@@ -28,9 +29,19 @@ raymond.sg currently redirects visitors to a Cloudflare Access sign-in page (`ra
 - [ ] Check in a private/incognito window: https://raymond.sg loads with no sign-in.
 - [ ] While there: **Settings** → **Build** → **Branch control**: decide on preview builds. If on, previews (with GA4) build for every branch, including `claude/...` ones.
 
+## Screenshots from Raymond
+
+Requirements for every light and dark pair:
+- Page content only (no browser bars), 1280 × 800 at 2x, so the file is 2560 × 1600 PNG. In Chrome: DevTools (Cmd+Opt+I) → device toolbar (Cmd+Shift+M) → Responsive, 1280 × 800, DPR 2 → Cmd+Shift+P → "Capture screenshot".
+- Light and dark taken one after the other: same page, same scroll position, same data, same panels open. Only the theme changes.
+- The card shows the top 16:10 of the image, so keep the important part near the top.
+- Nothing personal in view: account names or emails, chat history, other tabs.
+- Save as `src/assets/projects/<name>.png` (light) and `<name>-dark.png` (dark), or send them over and they get added with `screenshotDark`.
+
+- [ ] 9toFIRE: light and dark pair. Or make 9tofire.com public (it is behind Cloudflare Access, so visitors who click Visit hit a sign-in page) and the pair can be captured from the live site.
+- [ ] AI Verdict: light and dark pair of the extension dashboard, asking the same question in both, with the same layout (for example two panels plus The Verdict).
+
 ## Next
-- [ ] 9toFIRE: add a dark screenshot (`screenshotDark`) once 9tofire.com is public; it is behind Cloudflare Access, so visitors clicking Visit hit a sign-in page
-- [ ] Email & Text Hash Generator: download its screenshot from WordPress into `src/assets/projects/` and switch `screenshotUrl` to `screenshot`
 - [ ] First run of "Update CNET stats" from the Actions tab; check the log for warnings (CNET may block bots)
 - [ ] Check before launch: 9toFIRE sends no user inputs to a server, and MD5 & SHA works fully offline (the Principles card says so)
 - [ ] Open Graph share image (1200×630)

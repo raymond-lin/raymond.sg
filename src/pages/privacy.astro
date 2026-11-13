@@ -6,7 +6,7 @@ import { site, shortDate } from '../data/site';
 const updated = '2026-11-13';
 const link = 'accent-text underline underline-offset-4 hover:no-underline';
 ---
-<Base title={`Privacy · ${site.name}`} description="How raymond.sg uses Google Analytics and how to reach me about your data.">
+<Base title={`Privacy · ${site.name}`} description="What raymond.sg collects: usage statistics through Google Analytics, and nothing else unless you email me.">
   <Header />
   <main id="main" class="max-w-[1360px] mx-auto px-5 sm:px-6 lg:px-12">
     <article class="max-w-2xl py-14 sm:py-20 lg:py-24">
@@ -15,6 +15,10 @@ const link = 'accent-text underline underline-offset-4 hover:no-underline';
       <p class="text-sm muted mb-12">Last updated {shortDate(updated)}</p>
 
       <div class="space-y-10 leading-relaxed [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:mb-3 [&_p]:muted [&_p+p]:mt-3">
+        <section>
+          <p>This site has no accounts, forms or ads, and it doesn't ask for your name or contact details. The only data it gathers is usage statistics, which don't tell me who you are.</p>
+        </section>
+
         <section>
           <h2>Analytics</h2>
           <p>I use Google Analytics 4 to see how many people visit and which pages and links they use. It sets cookies to tell new visits from repeat ones, and records things like the pages you view, the site that sent you, your approximate location, your device and browser, and clicks on project links, downloads and my email address. Google keeps this data for 14 months, and may process it outside Singapore.</p>
@@ -27,8 +31,8 @@ const link = 'accent-text underline underline-offset-4 hover:no-underline';
         </section>
 
         <section>
-          <h2>Your data and questions</h2>
-          <p>Under Singapore's Personal Data Protection Act (PDPA) you can ask what personal data I hold about you, ask me to correct it, or withdraw your consent. Email <a class={link} href={`mailto:${site.email}`} data-track="contact" data-project="privacy_email">{site.email}</a>. If you email me, I use your message only to reply.</p>
+          <h2>Email</h2>
+          <p>If you email <a class={link} href={`mailto:${site.email}`} data-track="contact" data-project="privacy_email">{site.email}</a>, I use your message only to reply, and I'll delete it if you ask. The same address works for any question about this page.</p>
         </section>
       </div>
 

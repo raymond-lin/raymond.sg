@@ -8,9 +8,8 @@ specs:
   - { label: Hashes, value: "MD5 · SHA-1 · SHA-256 · SHA-384 · SHA-512" }
   - { label: Input, value: "TXT · CSV · typed text" }
 stackLine: "Windows desktop"
-# TODO: download this image into src/assets/projects and switch to `screenshot:`
-screenshotUrl: "https://raylin.wordpress.com/wp-content/uploads/2016/02/screenshot_email.jpg"
+screenshot: ../../assets/projects/email-text-hash-pro.png
 screenshotFit: contain
-screenshotAlt: "Email & Text Hash Generator hashing a list of email addresses"
+screenshotAlt: "Email & Text Hash Generator Pro, ready to hash a CSV or TXT list of email addresses"
 link: { label: Download, href: "https://raylin.wordpress.com/downloads/email-text-hash-generator/" }
 ---
