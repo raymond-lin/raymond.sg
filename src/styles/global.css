@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .muted { @apply text-monolith-muted dark:text-[#ABA79E]; }
+  .accent-text { @apply text-monolith-accentHover dark:text-[#FB923C]; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-looseCap accent-text; }
+  .eyebrow-sm { @apply text-[10px] font-semibold uppercase tracking-looseCap accent-text; }
+  .nav-link { @apply muted hover:text-monolith-accentHover dark:hover:text-[#FB923C] transition-colors py-3; }
+  .card { @apply bg-monolith-card dark:bg-monolith-darkCard border border-monolith-line dark:border-monolith-darkLine rounded-sm; }
+  .card-foot { @apply pt-6 mt-6 border-t border-monolith-line dark:border-monolith-darkLine flex items-center justify-between gap-3 text-[11px] tracking-editorial uppercase muted; }
+  .foot-value { @apply text-monolith-ink dark:text-white font-medium; }
+  .work-card { @apply card overflow-hidden flex flex-col transition-colors duration-300 hover:border-monolith-accent dark:hover:border-[#FB923C]; }
+  .card-meta { @apply flex items-center justify-between gap-3 text-xs uppercase tracking-editorial muted mb-4; }
+  .work-title { @apply text-2xl sm:text-3xl font-semibold tracking-tight mb-3; }
+  .work-desc { @apply text-sm muted leading-relaxed mb-6; }
+  .spec { @apply space-y-2 py-3 border-y border-monolith-line dark:border-monolith-darkLine text-sm; }
+  .spec > div { @apply flex justify-between items-baseline gap-4; }
+  .spec dt { @apply muted shrink-0; }
+  .spec dd { @apply font-medium text-right; }
+  .card-bottom { @apply mx-7 sm:mx-10 mb-7 sm:mb-8 pt-4 border-t border-monolith-line dark:border-monolith-darkLine flex items-center justify-between gap-4; }
+  .card-bottom > :last-child { @apply whitespace-nowrap; }
+  .arrow-link { @apply inline-flex items-center gap-1 min-h-[44px] text-xs font-semibold uppercase tracking-editorial hover:text-monolith-accentHover dark:hover:text-[#FB923C] transition-colors; }
+  .stack-row { @apply grid grid-cols-1 sm:grid-cols-4 gap-x-6 gap-y-3 py-5 border-t border-monolith-line dark:border-monolith-darkLine; }
+  .stack-label { @apply text-sm font-semibold tracking-tight pt-1; }
+  .stack-tags { @apply sm:col-span-3 flex flex-wrap gap-1.5; }
+  .chip { @apply px-2 py-1 bg-white dark:bg-neutral-800 border border-monolith-line dark:border-neutral-700 text-xs rounded text-monolith-ink dark:text-neutral-200; }
+  .shot { @apply relative m-0 aspect-[16/10] overflow-hidden border-b border-monolith-line dark:border-monolith-darkLine bg-monolith-canvas dark:bg-[#181816]; }
+  .shot img { @apply absolute inset-0 w-full h-full object-cover object-top; }
+  .shot-contain img { @apply object-contain object-center p-6 sm:p-8; }
+  .shot-missing { @apply absolute inset-0 hidden flex-col items-center justify-center gap-2 text-center; }
+  .shot.is-missing img { @apply hidden; }
+  .shot.is-missing .shot-missing { @apply flex; }
+  .stat { @apply flex items-baseline gap-3 mb-6 -mt-2; }
+  .stat-value { @apply font-serif italic text-4xl accent-text leading-none; }
+  .stat-label { @apply text-xs uppercase tracking-editorial muted; }
+  .fit-row { @apply flex gap-5 py-5 border-t border-monolith-line dark:border-monolith-darkLine; }
+  .fit-num { @apply font-mono text-xs accent-text pt-1 w-6 shrink-0; }
+  .badge { @apply inline-flex items-center gap-2 px-3 py-2 min-h-[36px] rounded-sm border border-monolith-accent/40 dark:border-[#FB923C]/40 bg-orange-50 dark:bg-[#2A1E16] text-xs font-medium text-[#9A3412] dark:text-[#FDBA74] hover:border-monolith-accent transition-colors; }
+  .copy-btn { @apply min-h-[44px] px-4 rounded-sm border border-monolith-line dark:border-monolith-darkLine text-xs font-semibold uppercase tracking-editorial muted hover:border-monolith-accent hover:text-monolith-accentHover dark:hover:text-[#FB923C] transition-colors; }
+}
+
+/* Italic serif words lean into the following space; give them room. */
+.italic-tail { padding-right: 0.14em; }

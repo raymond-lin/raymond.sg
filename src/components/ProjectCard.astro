@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArrowIcon from './ArrowIcon.astro';
+import cnet from '../data/cnet.json';
+import { floorLabel, shortDate } from '../data/site';
+
+interface Props { project: CollectionEntry<'projects'> }
+const { project } = Astro.props;
+const p = project.data;
+const num = String(p.order).padStart(2, '0');
+const isExternal = p.link?.href.startsWith('http');
+const showCnetBadge = p.cnet && cnet.categoryRank !== null && cnet.categoryRank <= 3;
+const stats = p.cnet
+  ? [{ value: floorLabel(cnet.cnetTotalDownloads + cnet.softpediaDownloads), label: 'downloads on CNET and Softpedia' }, ...p.stats]
+  : p.stats;
+const fitClass = p.screenshotFit === 'contain' ? 'shot shot-contain' : 'shot';
+---
+<article class="work-card">
+  <figure class={p.screenshot || p.screenshotUrl ? fitClass : `${fitClass} is-missing`}>
+    {p.screenshot && (
+      <Image src={p.screenshot} alt={p.screenshotAlt} widths={[640, 960, 1280]} sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" />
+    )}
+    {!p.screenshot && p.screenshotUrl && (
+      <img src={p.screenshotUrl} alt={p.screenshotAlt} loading="lazy" onerror="this.parentElement.classList.add('is-missing')" />
+    )}
+    <span class="shot-missing">
+      <span class="font-serif italic text-3xl">{p.title}</span>
+      <span class="text-[11px] uppercase tracking-editorial muted">Screenshot to come</span>
+    </span>
+  </figure>
+  <div class="p-7 sm:p-10 pb-6 flex-1">
+    <div class="card-meta">
+      <span class="accent-text font-semibold">{num} / {p.category}</span>
+      <span class="font-mono normal-case tracking-normal">{p.platform}</span>
+    </div>
+    <h3 class="work-title">{p.title}</h3>
+    <p class="work-desc">{p.summary}</p>
+    {(stats.length > 0 || showCnetBadge) && (
+      <div class="mb-6 -mt-2 space-y-3">
+        {stats.map((s) => (
+          <p class="stat !m-0"><span class="stat-value">{s.value}</span><span class="stat-label">{s.label}</span></p>
+        ))}
+        {showCnetBadge && (
+          <p>
+            <a class="badge" href={cnet.categoryUrl} rel="noopener" data-track="outbound" data-project={p.title}>
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"></path></svg>
+              Top 3 {cnet.categoryName} on CNET
+            </a>
+            <span class="block mt-1.5 text-[11px] muted">Last checked {shortDate(cnet.lastChecked)}</span>
+          </p>
+        )}
+      </div>
+    )}
+    <dl class="spec">
+      {p.specs.map((s) => (<div><dt>{s.label}</dt><dd>{s.value}</dd></div>))}
+    </dl>
+  </div>
+  <div class="card-bottom">
+    <span class="font-mono text-xs muted">{p.stackLine}</span>
+    {p.link ? (
+      <a class="arrow-link" href={p.link.href} rel={isExternal ? 'noopener' : undefined} data-track={p.link.label === 'Download' ? 'download' : 'outbound'} data-project={p.title}>
+        {p.link.label}<ArrowIcon />
+      </a>
+    ) : (
+      <span class="text-xs muted">{p.linkNote ?? ''}</span>
+    )}
+  </div>
+</article>

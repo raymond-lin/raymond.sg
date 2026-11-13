@@ -1,0 +1,30 @@
+---
+import { site } from '../data/site';
+---
+<header class="sticky top-0 z-50 bg-monolith-canvas/95 dark:bg-monolith-darkCanvas/95 border-b border-monolith-line dark:border-monolith-darkLine">
+  <div class="max-w-[1360px] mx-auto px-5 sm:px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-4 sm:gap-6 min-w-0">
+      <a class="group flex items-center gap-3 min-w-0" href="/#top" aria-label="Raymond Lin, back to top">
+        <span class="shrink-0 w-8 h-8 rounded-sm bg-monolith-ink dark:bg-white text-white dark:text-monolith-ink flex items-center justify-center font-mono font-bold text-xs tracking-wider transition-colors group-hover:bg-monolith-accent dark:group-hover:bg-monolith-accent dark:group-hover:text-white">RL</span>
+        <span class="flex flex-col min-w-0">
+          <span class="flex items-center gap-2 whitespace-nowrap">
+            <span class="text-sm font-semibold tracking-tight uppercase">{site.name}</span>
+            <span class="hidden sm:inline text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-orange-50 dark:bg-neutral-800 text-[#9A3412] dark:text-[#FB923C]">raymond.sg</span>
+          </span>
+          <span class="hidden sm:block text-[10px] tracking-looseCap muted uppercase font-medium whitespace-nowrap">{site.role}</span>
+        </span>
+      </a>
+      <span class="h-4 w-px bg-monolith-line dark:bg-monolith-darkLine hidden lg:inline-block"></span>
+      <span class="text-xs tracking-editorial muted uppercase font-medium hidden lg:inline-block">Singapore</span>
+    </div>
+    <nav aria-label="Primary" class="flex items-center gap-5 sm:gap-8 text-xs tracking-editorial uppercase font-medium">
+      <a class="nav-link hidden md:inline-block" href="/#about">About</a>
+      <a class="nav-link hidden md:inline-block" href="/#work">Work</a>
+      <a class="nav-link hidden md:inline-block" href="/#tools">Tools</a>
+      <a class="nav-link" href="/#contact">Contact</a>
+      <button id="theme-toggle" type="button" aria-label="Switch to dark theme" class="w-11 h-11 -mr-1.5 rounded-full border border-monolith-line dark:border-monolith-darkLine flex items-center justify-center muted hover:border-monolith-accent transition-colors">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"></path></svg>
+      </button>
+    </nav>
+  </div>
+</header>

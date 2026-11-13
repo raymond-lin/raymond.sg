@@ -1,0 +1,29 @@
+---
+const domains = [
+  { n: 'Domain 01', title: 'Enterprise platforms & integration', body: 'Salesforce, Business Central, Jira Service Management and Magento: integrations, multi-market rollouts and release governance.' },
+  { n: 'Domain 02', title: 'Modern web & edge', body: 'Next.js, Astro and React in TypeScript, static-first builds, Cloudflare Workers and Vercel.' },
+  { n: 'Domain 03', title: 'Desktop & developer tools', body: 'VB.NET Windows utilities for file integrity and data hashing, with free and Pro editions.' },
+];
+---
+<section id="about" class="scroll-mt-24 py-14 sm:py-20 lg:py-24 border-b border-monolith-line dark:border-monolith-darkLine">
+  <div class="pb-12">
+    <p class="eyebrow mb-2">How I work</p>
+    <h2 class="text-3xl sm:text-4xl font-medium tracking-tight">Systems thinking, hands on the keyboard</h2>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <div class="lg:col-span-7 space-y-5 leading-relaxed">
+      <p class="text-base sm:text-lg font-medium">I like the space where enterprise platforms meet hands-on software. I can work out how a CRM, ERP and commerce stack should fit together, and then write, test and deploy the app that sits on top.</p>
+      <p class="text-sm sm:text-base muted">On the enterprise side that means platform integrations, data moving cleanly between systems, release quality, and the unglamorous security basics that keep sites up: DNS, SSL, WAF and payment-gateway reviews.</p>
+      <p class="text-sm sm:text-base muted">On my own projects it means TypeScript end to end, Postgres with row-level security, serverless at the edge, and Vitest and Playwright running in GitHub Actions before anything ships. I started out writing Windows utilities, and some of them have now been downloaded hundreds of thousands of times. That taught me early that software outlives the excitement of building it.</p>
+    </div>
+    <div class="lg:col-span-5 space-y-4">
+      {domains.map((d) => (
+        <div class="card p-6">
+          <p class="eyebrow-sm mb-2">{d.n}</p>
+          <h3 class="text-sm font-semibold tracking-tight mb-1.5">{d.title}</h3>
+          <p class="text-sm muted leading-relaxed">{d.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

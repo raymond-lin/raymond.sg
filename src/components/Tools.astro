@@ -1,0 +1,22 @@
+---
+import { tools } from '../data/tools';
+---
+<section id="tools" class="scroll-mt-24 py-14 sm:py-20 lg:py-24 border-b border-monolith-line dark:border-monolith-darkLine">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10">
+    <div class="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
+      <p class="eyebrow mb-2">Tools &amp; platforms</p>
+      <h2 class="text-3xl sm:text-4xl font-medium tracking-tight mb-4">What I work with</h2>
+      <p class="text-sm muted leading-relaxed max-w-sm">The languages, platforms and services I've used in real, live projects.</p>
+    </div>
+    <dl class="lg:col-span-8">
+      {tools.map((row, i) => (
+        <div class:list={['stack-row', i === 0 && 'border-t-2 border-monolith-ink dark:border-[#E8E6DF]', i === tools.length - 1 && 'border-b border-monolith-line dark:border-monolith-darkLine']}>
+          <dt class="stack-label">{row.label}</dt>
+          <dd class="stack-tags">
+            {row.items.map((item) => <span class:list={['chip', row.mono && 'font-mono']}>{item}</span>)}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
