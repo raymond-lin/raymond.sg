@@ -5,7 +5,7 @@ export const site = {
   email: 'hello@raymond.sg',
   title: 'Raymond Lin, Solutions Architect & Full-stack Engineer',
   description:
-    'Raymond Lin, Singapore. Business systems across Asia-Pacific markets, plus web apps, browser extensions and Windows tools he builds and runs himself.',
+    'Raymond Lin, Singapore. Enterprise platforms and vendor teams across Asia-Pacific, plus web apps, browser extensions and Windows tools he builds and runs himself.',
   ogDescription: 'I deliver enterprise systems across APAC, and build and run software of my own.',
 };
 
