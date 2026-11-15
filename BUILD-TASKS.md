@@ -17,7 +17,7 @@
 - [x] GA4 (`G-83W1EJHLHE`) in the production build and seen in Realtime; GA4 admin settings done (key events skipped on purpose: events are still recorded under Reports → Engagement → Events)
 - [x] hello@raymond.sg routed to Gmail (Cloudflare Email Routing)
 - [x] Enterprise work section, mobile menu, privacy page (GA4, 14-month retention, no banner)
-- [x] Project screenshots follow the site theme (light and dark pairs for Lyricsdecode and Decide A Place)
+- [x] Project screenshots follow the site theme (light and dark pairs for 9toFIRE, Lyricsdecode and Decide A Place)
 - [x] Pro screenshots for MD5 & SHA Checksum Utility (3.0 Pro) and Email & Text Hash Generator (1.0 Pro), stored in the repo
 
 ## Launch follow-ups
@@ -38,7 +38,6 @@ Requirements for every light and dark pair:
 - Nothing personal in view: account names or emails, chat history, other tabs.
 - Save as `src/assets/projects/<name>.png` (light) and `<name>-dark.png` (dark), or send them over and they get added with `screenshotDark`.
 
-- [ ] 9toFIRE: light and dark pair. Or make 9tofire.com public (it is behind Cloudflare Access, so visitors who click Visit hit a sign-in page) and the pair can be captured from the live site.
 - [ ] AI Verdict: light and dark pair of the extension dashboard, asking the same question in both, with the same layout (for example two panels plus The Verdict).
 
 More screenshots per project, for the case study pages (the home page cards keep one image each). Three to five per project, one per main screen or flow, same size rules as above. Light only is fine; add dark versions if the page should follow the theme.

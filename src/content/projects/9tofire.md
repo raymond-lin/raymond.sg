@@ -8,7 +8,8 @@ specs:
   - { label: Rules, value: "CPF · HDB · income tax" }
   - { label: Quality, value: "Vitest + Playwright in GitHub Actions" }
 stackLine: "Astro · TypeScript"
-screenshot: ../../assets/projects/9tofire.jpg
+screenshot: ../../assets/projects/9tofire.png
+screenshotDark: ../../assets/projects/9tofire-dark.png
 screenshotAlt: "9toFIRE showing when a typical worker could reach financial independence"
 link: { label: Visit, href: "https://9tofire.com/" }
 ---
