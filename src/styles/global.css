@@ -38,5 +38,3 @@
   .badge { @apply inline-flex items-center gap-2 px-3 py-2 min-h-[36px] rounded-sm border border-monolith-accent/40 dark:border-[#FB923C]/40 bg-orange-50 dark:bg-[#2A1E16] text-xs font-medium text-[#9A3412] dark:text-[#FDBA74] hover:border-monolith-accent transition-colors; }
 }
 
-/* Italic serif words lean into the following space; give them room. */
-.italic-tail { padding-right: 0.14em; }
