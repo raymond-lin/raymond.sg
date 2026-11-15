@@ -41,11 +41,19 @@ Requirements for every light and dark pair:
 - [ ] 9toFIRE: light and dark pair. Or make 9tofire.com public (it is behind Cloudflare Access, so visitors who click Visit hit a sign-in page) and the pair can be captured from the live site.
 - [ ] AI Verdict: light and dark pair of the extension dashboard, asking the same question in both, with the same layout (for example two panels plus The Verdict).
 
+More screenshots per project, for the case study pages (the home page cards keep one image each). Three to five per project, one per main screen or flow, same size rules as above. Light only is fine; add dark versions if the page should follow the theme.
+- [ ] 9toFIRE: the inputs, the result, the market simulation view, and one detail screen (for example CPF or HDB settings).
+- [ ] AI Verdict: dashboard, The Verdict, River view, settings. The gallery on aiverdict.github.io already has these; send newer ones if they have changed.
+- [ ] Lyricsdecode: the home page, one song explainer page, and the quiz.
+- [ ] Decide A Place: search, results with filters, and "Decide for Me".
+- [ ] MD5 & SHA Checksum Utility: Folder comparison and the command line (both already on the WordPress download page, so they can be reused).
+- [ ] Email & Text Hash Generator: the Text panel and a sample input and output (both already on the WordPress download page).
+
 ## Next
 - [ ] First run of "Update CNET stats" from the Actions tab; check the log for warnings (CNET may block bots)
 - [ ] Check before launch: 9toFIRE sends no user inputs to a server, and MD5 & SHA works fully offline (the Principles card says so)
 - [ ] Open Graph share image (1200×630)
-- [ ] 9toFIRE case study page at `/work/9tofire/` (Problem, My role, Stack, One hard technical decision, Result, Screenshots, Links), then link it from the card
+- [ ] 9toFIRE case study page at `/projects/9tofire/` (Problem, My role, Stack, One hard technical decision, Result, Screenshots, Links), then link it from the card
 - [ ] raym0nd.com redirect: keep the Pro purchase pages working before redirecting anything
 
 ## Later
