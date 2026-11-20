@@ -27,6 +27,8 @@ The first `npm test` on a new machine needs a browser: `npx playwright install c
 
 The site runs as the Cloudflare Worker `raymond-sg` (Workers & Pages), connected to this GitHub repo. Every push to `main` builds (`npm run build`) and deploys automatically, including the weekly CNET stats update.
 
+- `wrangler.jsonc` tells Cloudflare to serve `dist/` as static files. Preview builds (`wrangler versions upload`) fail without it, and it stops production deploys from auto-configuring the project. Keep `name` matching the Worker.
+- Preview builds are on: every branch gets a preview link on its pull request.
 - Build variables (Worker → Settings → Build → Variables and secrets): `PUBLIC_GA4_ID`. These are read at build time, so rebuild after changing one.
 - Domains (Worker → Domains): `raymond.sg`; `www.raymond.sg` redirects to it.
 - Email: Cloudflare Email Routing sends `hello@raymond.sg` to Gmail.
