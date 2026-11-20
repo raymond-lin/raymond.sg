@@ -17,7 +17,7 @@
 - [x] GA4 (`G-83W1EJHLHE`) in the production build and seen in Realtime; GA4 admin settings done (key events skipped on purpose: events are still recorded under Reports → Engagement → Events)
 - [x] hello@raymond.sg routed to Gmail (Cloudflare Email Routing)
 - [x] Enterprise work section, mobile menu, privacy page (GA4, 14-month retention, no banner)
-- [x] Project screenshots follow the site theme (light and dark pairs for 9toFIRE, Lyricsdecode and Decide A Place)
+- [x] Project screenshots follow the site theme (light and dark pairs for 9toFIRE, AI Verdict, Lyricsdecode and Decide A Place)
 - [x] Pro screenshots for MD5 & SHA Checksum Utility (3.0 Pro) and Email & Text Hash Generator (1.0 Pro), stored in the repo
 
 ## Launch follow-ups
@@ -27,7 +27,7 @@ raymond.sg currently redirects visitors to a Cloudflare Access sign-in page (`ra
 - [ ] Workers & Pages → `raymond-sg` → **Access** tab → turn protection off for `raymond.sg` (and `www.raymond.sg` if listed).
 - [ ] If it's still on: one.dash.cloudflare.com (Zero Trust) → **Access controls** → **Applications** → delete the application for `raymond.sg`.
 - [ ] Check in a private/incognito window: https://raymond.sg loads with no sign-in.
-- [ ] While there: **Settings** → **Build** → **Branch control**: decide on preview builds. If on, previews (with GA4) build for every branch, including `claude/...` ones.
+- [x] Preview builds on: every branch, including `claude/...` ones, gets a Cloudflare preview link on its pull request. GA4 also loads on previews (accepted for now; to exclude them later, load GA4 only on raymond.sg).
 
 ## Screenshots from Raymond
 
@@ -38,7 +38,7 @@ Requirements for every light and dark pair:
 - Nothing personal in view: account names or emails, chat history, other tabs.
 - Save as `src/assets/projects/<name>.png` (light) and `<name>-dark.png` (dark), or send them over and they get added with `screenshotDark`.
 
-- [ ] AI Verdict: light and dark pair of the extension dashboard, asking the same question in both, with the same layout (for example two panels plus The Verdict).
+- [ ] AI Verdict: a better-matched light and dark pair of the extension dashboard, same question and same layout in both. For now the card uses the Dashboard and Light Theme shots from the aiverdict.github.io gallery; their panels differ slightly in height.
 
 More screenshots per project, for the case study pages (the home page cards keep one image each). Three to five per project, one per main screen or flow, same size rules as above. Light only is fine; add dark versions if the page should follow the theme.
 - [ ] 9toFIRE: the inputs, the result, the market simulation view, and one detail screen (for example CPF or HDB settings).

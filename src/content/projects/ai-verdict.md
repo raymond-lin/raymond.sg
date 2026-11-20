@@ -9,6 +9,7 @@ specs:
   - { label: Framework, value: "React · WXT" }
 stackLine: "React · WXT · Workers"
 screenshot: ../../assets/projects/ai-verdict.png
-screenshotAlt: "AI Verdict comparing answers from AI assistants side by side"
+screenshotDark: ../../assets/projects/ai-verdict-dark.png
+screenshotAlt: "AI Verdict dashboard with ChatGPT, Gemini, Claude and Perplexity answering the same question, and the verdict below"
 link: { label: Visit, href: "https://aiverdict.github.io/" }
 ---
