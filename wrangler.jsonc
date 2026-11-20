@@ -1,5 +1,5 @@
 // Cloudflare Workers config: serves the static Astro build in dist/ (no server code).
-// Needed for preview builds (`wrangler versions upload`) and keeps production
+// Needed for preview builds (`wrangler preview`) and keeps production
 // deploys from auto-configuring the project. "name" must match the Worker in Cloudflare.
 {
   "name": "raymond-sg",
@@ -7,5 +7,8 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"
-  }
+  },
+  // Required by `wrangler preview`, which Cloudflare runs for preview builds.
+  // Assets and other settings stay at the top level.
+  "previews": {}
 }
