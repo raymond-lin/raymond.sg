@@ -27,7 +27,7 @@ raymond.sg currently redirects visitors to a Cloudflare Access sign-in page (`ra
 - [ ] Workers & Pages → `raymond-sg` → **Access** tab → turn protection off for `raymond.sg` (and `www.raymond.sg` if listed).
 - [ ] If it's still on: one.dash.cloudflare.com (Zero Trust) → **Access controls** → **Applications** → delete the application for `raymond.sg`.
 - [ ] Check in a private/incognito window: https://raymond.sg loads with no sign-in.
-- [ ] While there: **Settings** → **Build** → **Branch control**: decide on preview builds. If on, previews (with GA4) build for every branch, including `claude/...` ones.
+- [x] Preview builds on: every branch, including `claude/...` ones, gets a Cloudflare preview link on its pull request. GA4 also loads on previews (accepted for now; to exclude them later, load GA4 only on raymond.sg).
 
 ## Screenshots from Raymond
 
