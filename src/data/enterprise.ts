@@ -1,59 +1,59 @@
-// Enterprise work: platforms delivered for organisations. No employer names, no dates.
-// Keep every line factual: role is what Raymond actually did, stat only if the number is real.
+// Enterprise work: things delivered for organisations, one card each. No employer names, no dates.
+// Keep every line factual: `role` is what Raymond actually did (credit vendors for their part),
+// `tools` is a short line of what was used. The full tool list lives in src/data/tools.ts.
+// Order: strongest and most recent first; supporting roles last.
 export interface EnterpriseItem {
   category: string;
   title: string;
   summary: string;
   role: string;
-  platforms: string;
-  scope?: string;
-  stat?: { value: string; label: string };
+  tools: string;
 }
 
 export const enterprise: EnterpriseItem[] = [
   {
-    category: 'CRM & ERP',
-    title: 'Release pipelines for Salesforce and Business Central',
-    summary: 'Every Salesforce and Business Central change traced from its Jira ticket to its GitLab CI/CD deployment.',
-    role: 'Supported the Salesforce go-live, set up CI/CD and Jira integration',
-    platforms: 'Salesforce · Business Central · GitLab · Jira',
+    category: 'DevOps',
+    title: 'Source control and CI/CD for business systems',
+    summary:
+      'Salesforce and Business Central code brought into GitLab, with approval-gated CI/CD pipelines, basic SAST and DAST using open-source tools, and every change linked to Jira.',
+    role: 'Set up GitLab, access and licensing, moved the code over, linked Jira, and set the pipeline standards the vendor follows',
+    tools: 'GitLab · CI/CD · SAST/DAST · Jira',
   },
   {
     category: 'E-commerce',
-    title: 'A regional D2C store, replatformed',
-    summary: 'A direct-to-consumer store moved from SAP Commerce Cloud to Shopline, with its integrations redesigned.',
+    title: 'Moving a regional online store to a new platform',
+    summary:
+      'A direct-to-consumer store for five Asia-Pacific markets, moved from SAP Commerce Cloud to Shopline with its integrations redesigned.',
     role: 'Set up SAP Commerce with the vendor, then led the migration',
-    platforms: 'SAP Commerce Cloud → Shopline',
-    scope: 'SG · MY · TH · TW · HK',
+    tools: 'SAP Commerce Cloud → Shopline',
   },
   {
     category: 'ITSM',
-    title: 'A service desk on Jira',
-    summary: 'Jira Service Management as the service desk, from the first request types and workflows to go-live.',
-    role: 'Designed and set up end to end',
-    platforms: 'Jira Service Management',
-  },
-  {
-    category: 'Analytics',
-    title: 'One way to measure every market',
-    summary: 'One GA4, Tag Manager and Clarity setup across regional sites, so markets compare like for like.',
-    role: 'Defined the standard and rolled it out',
-    platforms: 'GA4 · GTM · Clarity',
-    scope: 'Regional sites',
+    title: 'A service desk for business systems',
+    summary:
+      'Jira Service Management for users to report system issues and raise change and service requests, and for agents to work them.',
+    role: 'Set up end to end',
+    tools: 'Jira Service Management',
   },
   {
     category: 'Security',
     title: 'Keeping regional sites up and safe',
-    summary: 'DNS, SSL and WAF across regional sites, plus API and payment gateway reviews against PCI principles and PDPA.',
+    summary: 'Domains, DNS, SSL certificates and WAF rules across regional sites, plus API and payment gateway reviews.',
     role: 'Owned operations and reviews',
-    platforms: 'DNS · SSL/TLS · WAF',
-    scope: 'Regional sites',
+    tools: 'DNS · SSL/TLS · WAF · PCI · PDPA',
   },
   {
-    category: 'Web & booking',
-    title: 'Brand sites with online booking',
-    summary: 'Brand websites on Magento and Drupal with online booking and WorldPay payments, plus a ticketing system in PHP.',
-    role: 'Ran the sites, built the ticketing system',
-    platforms: 'Magento · Drupal · WorldPay · PHP',
+    category: 'Analytics',
+    title: 'One way to measure every market',
+    summary: 'The same tracking setup on every regional site, so traffic and conversions compare like for like across markets.',
+    role: 'Defined the standard and rolled it out',
+    tools: 'GA4 · GTM · Search Console · Clarity',
+  },
+  {
+    category: 'CRM',
+    title: 'Taking Salesforce live',
+    summary: 'A Salesforce rollout taken through go-live with the business teams and the implementation partner.',
+    role: 'Supported the project through go-live',
+    tools: 'Salesforce',
   },
 ];
