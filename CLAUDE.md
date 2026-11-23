@@ -8,6 +8,7 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 - `npm run check`: Astro and TypeScript checks
 - `npm test`: Playwright smoke tests (desktop and phone); builds must pass these
 - `npm run cnet`: refresh `src/data/cnet.json` from CNET Download
+- `npm run og`: regenerate the share image `public/og.png` from `src/data/site.ts`
 
 ## Where things live
 - Projects: one Markdown file per project in `src/content/projects/` (schema in `src/content.config.ts`). Order with `order`. Screenshots in `src/assets/projects/`.
