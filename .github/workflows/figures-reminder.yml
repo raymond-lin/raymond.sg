@@ -1,15 +1,15 @@
 name: Remind to update download figures
 
 # CNET and Softpedia block automated visitors, so their download figures may need updating by
-# hand. Every three months (first day of Jan, Apr, Jul and Oct, 09:23 Singapore time) this opens
+# hand. On the first day of every month (09:23 Singapore time) this opens
 # the issue "Update download figures" with the current numbers and links, mentioning the owner so
-# GitHub emails. If last quarter's issue is still open, it adds a comment instead.
+# GitHub emails. If last month's issue is still open, it adds a comment instead.
 # To update: change cnetTotalDownloads / softpediaDownloads in src/data/cnet.json (or send the
 # numbers to Claude), then close the issue.
 
 on:
   schedule:
-    - cron: '23 1 1 1,4,7,10 *'
+    - cron: '23 1 1 * *' # 1st of every month, 09:23 Singapore time
   workflow_dispatch:
 
 permissions:
