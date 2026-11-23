@@ -20,6 +20,7 @@ const projects = defineCollection({
       screenshotFit: z.enum(['cover', 'contain']).default('cover'),
       stats: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
       cnet: z.boolean().default(false), // pull downloads and ranking from src/data/cnet.json
+      songCount: z.boolean().default(false), // show the song count from src/data/lyricsdecode.json
       link: z.object({ label: z.string(), href: z.string() }).optional(),
       linkNote: z.string().optional(), // shown when there is no link, e.g. "Case study soon"
       draft: z.boolean().default(false),

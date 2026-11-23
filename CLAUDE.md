@@ -9,6 +9,7 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 - `npm test`: Playwright smoke tests (desktop and phone); builds must pass these
 - `npm run cnet`: refresh `src/data/cnet.json` from CNET Download
 - `npm run og`: regenerate the share image `public/og.png` from `src/data/site.ts`
+- `npm run songs`: refresh `src/data/lyricsdecode.json` (song count) from Lyricsdecode's sitemap
 
 ## Where things live
 - Projects: one Markdown file per project in `src/content/projects/` (schema in `src/content.config.ts`). Order with `order`. Screenshots in `src/assets/projects/`.
@@ -16,7 +17,9 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 - Enterprise work (platforms delivered, no employer names or dates): `src/data/enterprise.ts`
 - Privacy page: `src/pages/privacy.astro` (update it if analytics, hosting or data retention change)
 - Site name, email, helpers (`floorLabel`, `shortDate`): `src/data/site.ts`
-- CNET stats for the MD5 & SHA Checksum Utility: `src/data/cnet.json`, refreshed weekly by `.github/workflows/cnet-stats.yml` (opens the issue "CNET stats need a look" when CNET blocks it or its page changes). The Softpedia figure there is updated by hand.
+- Live figures on project cards, refreshed every Monday by `.github/workflows/stats.yml` (opens the issue "Project stats need a look" when something is blocked or changes, closes it after a clean run):
+  - MD5 & SHA Checksum Utility: `src/data/cnet.json` (CNET downloads and rank; the Softpedia figure there is updated by hand)
+  - Lyricsdecode: `src/data/lyricsdecode.json` (song pages in its sitemap, shown as "400+ songs explained" with a Last checked date)
 - Styles: Tailwind 3 (`tailwind.config.cjs`) plus component classes in `src/styles/global.css` (`.muted`, `.accent-text`, `.eyebrow`, `.work-card`, `.chip`, ...)
 - Hosting: Cloudflare Worker `raymond-sg`, connected to GitHub; every push to `main` deploys, other branches get preview links. Config in `wrangler.jsonc` (see README)
 - Original design reference: `docs/design-reference.html`

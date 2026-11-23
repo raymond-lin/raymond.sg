@@ -1,6 +1,6 @@
 // Refreshes src/data/cnet.json from CNET Download: total downloads (product page) and
 // rank within the File Management category (category page). Run weekly by
-// .github/workflows/cnet-stats.yml, or locally with `npm run cnet`.
+// .github/workflows/stats.yml, or locally with `npm run cnet`.
 //
 // Rules:
 // - Downloads only ever go up; a lower or unparseable number is ignored.
@@ -8,7 +8,7 @@
 //   which hides the "Top 3" badge on the site.
 // - If CNET blocks the request or the page layout changes, nothing is written and
 //   the workflow logs a warning, so the site keeps its last known values. The workflow
-//   then opens (or comments on) the issue "CNET stats need a look", and closes it after
+//   then opens (or comments on) the issue "Project stats need a look", and closes it after
 //   the next clean run.
 // - The Softpedia figure is entered by hand: Softpedia blocks automated visitors.
 import { appendFile, readFile, writeFile } from 'node:fs/promises';
@@ -22,8 +22,8 @@ const HEADERS = {
 
 const warnings = [];
 const warn = (msg) => {
-  warnings.push(msg);
-  console.log(`::warning::${msg}`);
+  warnings.push(`CNET: ${msg}`);
+  console.log(`::warning::CNET: ${msg}`);
 };
 
 async function get(url) {
@@ -84,6 +84,6 @@ if (changed) {
 
 // In GitHub Actions, hand the warnings to the workflow, which opens an issue when there are any.
 if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `warnings=${warnings.length}\n`);
-if (process.env.RUNNER_TEMP) {
-  await writeFile(`${process.env.RUNNER_TEMP}/cnet-warnings.md`, warnings.map((w) => `- ${w}`).join('\n') + '\n');
+if (process.env.RUNNER_TEMP && warnings.length) {
+  await appendFile(`${process.env.RUNNER_TEMP}/stats-warnings.md`, warnings.map((w) => `- ${w}`).join('\n') + '\n');
 }

@@ -37,4 +37,4 @@ The site runs as the Cloudflare Worker `raymond-sg` (Workers & Pages), connected
 ## Automation
 
 - **CI** (`.github/workflows/ci.yml`): type check, build and Playwright tests on every push and pull request.
-- **CNET stats** (`.github/workflows/cnet-stats.yml`): every Monday, reads total downloads and the category rank for MD5 & SHA Checksum Utility, and commits `src/data/cnet.json` if anything changed. If the app leaves the top 3, the badge hides itself. Run it by hand from the Actions tab ("Run workflow").
+- **Project stats** (`.github/workflows/stats.yml`, "Update project stats"): every Monday, reads CNET's total downloads and category rank for MD5 & SHA Checksum Utility (`src/data/cnet.json`; the badge hides itself outside the top 3) and counts Lyricsdecode's song pages from its sitemap (`src/data/lyricsdecode.json`), then commits any change. If something is blocked or its page changes, it opens the issue "Project stats need a look" and mentions you, so GitHub emails; the issue closes after the next clean run. Run it by hand from the Actions tab ("Run workflow").

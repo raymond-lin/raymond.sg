@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import ArrowIcon from './ArrowIcon.astro';
 import cnet from '../data/cnet.json';
+import lyricsdecode from '../data/lyricsdecode.json';
 import { floorLabel, shortDate } from '../data/site';
 
 interface Props { project: CollectionEntry<'projects'> }
@@ -11,9 +12,11 @@ const p = project.data;
 const num = String(p.order).padStart(2, '0');
 const isExternal = p.link?.href.startsWith('http');
 const showCnetBadge = p.cnet && cnet.categoryRank !== null && cnet.categoryRank <= 3;
-const stats = p.cnet
-  ? [{ value: floorLabel(cnet.cnetTotalDownloads + cnet.softpediaDownloads), label: 'downloads on CNET and Softpedia' }, ...p.stats]
-  : p.stats;
+const stats = [
+  ...(p.cnet ? [{ value: floorLabel(cnet.cnetTotalDownloads + cnet.softpediaDownloads), label: 'downloads on CNET and Softpedia' }] : []),
+  ...(p.songCount ? [{ value: floorLabel(lyricsdecode.songs), label: 'songs explained' }] : []),
+  ...p.stats,
+];
 const fitClass = p.screenshotFit === 'contain' ? 'shot shot-contain' : 'shot';
 ---
 <article class="work-card">
@@ -44,6 +47,7 @@ const fitClass = p.screenshotFit === 'contain' ? 'shot shot-contain' : 'shot';
         {stats.map((s) => (
           <p class="stat !m-0"><span class="stat-value">{s.value}</span><span class="stat-label">{s.label}</span></p>
         ))}
+        {p.songCount && <span class="-mt-2 text-[11px] muted">Last checked {shortDate(lyricsdecode.lastChecked)}</span>}
         {showCnetBadge && (
           <p>
             <a class="badge" href={cnet.categoryUrl} rel="noopener" data-track="outbound" data-project={p.title}>

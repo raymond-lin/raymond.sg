@@ -11,7 +11,7 @@ export const site = {
 
 /** Round a count down to a figure that stays true as it grows: 836,024 -> "800,000+". */
 export function floorLabel(n: number): string {
-  const step = n >= 100_000 ? 100_000 : n >= 10_000 ? 10_000 : n >= 1_000 ? 1_000 : 1;
+  const step = n >= 100_000 ? 100_000 : n >= 10_000 ? 10_000 : n >= 1_000 ? 1_000 : n >= 100 ? 100 : 1;
   return `${(Math.floor(n / step) * step).toLocaleString('en-US')}+`;
 }
 
