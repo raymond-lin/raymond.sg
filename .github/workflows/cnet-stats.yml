@@ -7,6 +7,10 @@ on:
 
 permissions:
   contents: write
+  issues: write
+
+env:
+  ISSUE_TITLE: CNET stats need a look
 
 jobs:
   update:
@@ -16,7 +20,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - run: node scripts/update-cnet.mjs
+      - id: stats
+        run: node scripts/update-cnet.mjs
       - name: Commit if changed
         run: |
           if git diff --quiet -- src/data/cnet.json; then
@@ -28,3 +33,37 @@ jobs:
           git add src/data/cnet.json
           git commit -m "chore: update CNET stats"
           git push
+
+      # CNET blocked the bot, changed its page, or the job failed: open an issue (or add to the
+      # open one). The mention makes GitHub email the owner. The site keeps its last figures.
+      - name: Raise an issue
+        if: failure() || steps.stats.outputs.warnings != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "@raymond-lin The weekly CNET stats update needs a look. The site keeps its last known figures until a run succeeds."
+            echo
+            if [ -s "$RUNNER_TEMP/cnet-warnings.md" ]; then cat "$RUNNER_TEMP/cnet-warnings.md"; else echo "- The job failed before it could record what went wrong."; fi
+            echo
+            echo "Run log: $RUN_URL"
+            echo
+            echo "This issue closes itself after the next clean run."
+          } > "$RUNNER_TEMP/issue.md"
+          num=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body-file "$RUNNER_TEMP/issue.md"
+          else
+            gh issue create --title "$ISSUE_TITLE" --body-file "$RUNNER_TEMP/issue.md"
+          fi
+
+      - name: Close the issue after a clean run
+        if: success() && steps.stats.outputs.warnings == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          num=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue close "$num" --comment "This week's run worked, so the CNET stats are up to date again."
+          fi

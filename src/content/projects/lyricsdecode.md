@@ -2,8 +2,8 @@
 title: Lyricsdecode
 order: 3
 category: Content site
-platform: Web
-summary: "A song-lyrics explainer site with hundreds of pages, each one breaking down what a song's lyrics actually mean."
+platform: Website
+summary: "Asian pop lyrics explained line by line, with romanisation and English meaning, across Mandopop, Cantopop, K-pop, J-pop and Hokkien pop, plus a lyrics quiz."
 stats:
   - { value: "120,000+", label: "page views since 2024" }
 specs:

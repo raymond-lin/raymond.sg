@@ -16,7 +16,7 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 - Enterprise work (platforms delivered, no employer names or dates): `src/data/enterprise.ts`
 - Privacy page: `src/pages/privacy.astro` (update it if analytics, hosting or data retention change)
 - Site name, email, helpers (`floorLabel`, `shortDate`): `src/data/site.ts`
-- CNET stats for the MD5 & SHA Checksum Utility: `src/data/cnet.json`, refreshed weekly by `.github/workflows/cnet-stats.yml`
+- CNET stats for the MD5 & SHA Checksum Utility: `src/data/cnet.json`, refreshed weekly by `.github/workflows/cnet-stats.yml` (opens the issue "CNET stats need a look" when CNET blocks it or its page changes). The Softpedia figure there is updated by hand.
 - Styles: Tailwind 3 (`tailwind.config.cjs`) plus component classes in `src/styles/global.css` (`.muted`, `.accent-text`, `.eyebrow`, `.work-card`, `.chip`, ...)
 - Hosting: Cloudflare Worker `raymond-sg`, connected to GitHub; every push to `main` deploys, other branches get preview links. Config in `wrangler.jsonc` (see README)
 - Original design reference: `docs/design-reference.html`
