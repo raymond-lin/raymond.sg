@@ -17,6 +17,8 @@
 - [x] GA4 (`G-83W1EJHLHE`) in the production build and seen in Realtime; GA4 admin settings done (key events skipped on purpose: events are still recorded under Reports → Engagement → Events)
 - [x] hello@raymond.sg routed to Gmail (Cloudflare Email Routing)
 - [x] Enterprise work section, mobile menu, privacy page (GA4, 14-month retention, no banner)
+- [x] Claims checked: 9toFIRE runs its 1,000 simulations in the browser and sends no inputs anywhere (no fetch calls; CSP allows only itself, GA4 and Cloudflare analytics; GA4 events carry names only). Email & Text Hash Generator works on your own machine, offline.
+- [x] Open Graph share image (`public/og.png`, 1200 × 630); regenerate with `npm run og` after changing the name, role or headline
 - [x] Project screenshots follow the site theme (light and dark pairs for 9toFIRE, AI Verdict, Lyricsdecode and Decide A Place)
 - [x] Pro screenshots for MD5 & SHA Checksum Utility (3.0 Pro) and Email & Text Hash Generator (1.0 Pro), stored in the repo
 
@@ -49,9 +51,7 @@ More screenshots per project, for the case study pages (the home page cards keep
 - [ ] Email & Text Hash Generator: the Text panel and a sample input and output (both already on the WordPress download page).
 
 ## Next
-- [ ] First run of "Update CNET stats" from the Actions tab; check the log for warnings (CNET may block bots)
-- [ ] Check before launch: 9toFIRE sends no user inputs to a server, and MD5 & SHA works fully offline (the Principles card says so)
-- [ ] Open Graph share image (1200×630)
+- [ ] First run of "Update project stats" from the Actions tab (CNET downloads and rank, Lyricsdecode song count). CNET refused automated requests when tested from a cloud server (Fastly "412"), so GitHub may be blocked too. If it is, the workflow opens the issue "Project stats need a look" and mentions you, so GitHub emails you; the site keeps its last figures. The Softpedia figure in `src/data/cnet.json` is updated by hand (Softpedia blocks bots); the issue "Update download figures" reminds you on the first of every month. If CNET is blocked every week, turn off its step in `stats.yml` and update it with Softpedia from that reminder.
 - [ ] 9toFIRE case study page at `/projects/9tofire/` (Problem, My role, Stack, One hard technical decision, Result, Screenshots, Links), then link it from the card
 - [ ] raym0nd.com redirect: keep the Pro purchase pages working before redirecting anything
 

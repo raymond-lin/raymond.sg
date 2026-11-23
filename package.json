@@ -9,7 +9,9 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "playwright test",
-    "cnet": "node scripts/update-cnet.mjs"
+    "cnet": "node scripts/update-cnet.mjs",
+    "og": "node scripts/og-image.mjs",
+    "songs": "node scripts/update-lyricsdecode.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

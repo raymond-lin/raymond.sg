@@ -1,0 +1,51 @@
+name: Remind to update download figures
+
+# CNET and Softpedia block automated visitors, so their download figures may need updating by
+# hand. On the first day of every month (09:23 Singapore time) this opens
+# the issue "Update download figures" with the current numbers and links, mentioning the owner so
+# GitHub emails. If last month's issue is still open, it adds a comment instead.
+# To update: change cnetTotalDownloads / softpediaDownloads in src/data/cnet.json (or send the
+# numbers to Claude), then close the issue.
+
+on:
+  schedule:
+    - cron: '23 1 1 * *' # 1st of every month, 09:23 Singapore time
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  ISSUE_TITLE: Update download figures
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Open or update the reminder
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          f=src/data/cnet.json
+          {
+            echo "@raymond-lin Time to check the download figures on raymond.sg. CNET and Softpedia block automated checks, so these may need updating by hand."
+            echo
+            echo "| Source | Figure on the site | Where to check |"
+            echo "|---|---|---|"
+            echo "| CNET total downloads | $(jq -r '.cnetTotalDownloads' $f) | $(jq -r '.productUrl' $f) (\"Total Downloads\") |"
+            echo "| CNET rank in $(jq -r '.categoryName' $f) | $(jq -r '.categoryRank // "not in top list"' $f) | $(jq -r '.categoryUrl' $f) |"
+            echo "| Softpedia downloads | $(jq -r '.softpediaDownloads' $f) | https://www.softpedia.com/dyn-search.php?search_term=MD5+SHA+Checksum+Utility |"
+            echo
+            echo "CNET figures last checked: $(jq -r '.lastChecked' $f)"
+            echo
+            echo "**To update:** edit \`src/data/cnet.json\`, or send the new numbers to Claude. Then close this issue."
+            echo "Downloads only ever go up; the site shows them as a rounded-down total (for example 800,000+)."
+          } > "$RUNNER_TEMP/reminder.md"
+          num=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body-file "$RUNNER_TEMP/reminder.md"
+          else
+            gh issue create --title "$ISSUE_TITLE" --body-file "$RUNNER_TEMP/reminder.md"
+          fi

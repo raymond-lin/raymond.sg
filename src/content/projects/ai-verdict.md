@@ -2,7 +2,7 @@
 title: AI Verdict
 order: 2
 category: Browser extension
-platform: Chrome + Firefox
+platform: "Chrome · Firefox · Edge"
 summary: "Asks ChatGPT, Claude, Gemini and Perplexity the same question at once, then builds one consensus verdict. It uses your existing sessions, so there are no API keys to manage."
 specs:
   - { label: Backend, value: Cloudflare Workers }

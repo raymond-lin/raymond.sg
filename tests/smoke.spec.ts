@@ -84,3 +84,9 @@ test('project screenshots follow the theme', async ({ page }) => {
     expect(src.includes('-dark'), `${scheme}: ${src}`).toBe(scheme === 'dark');
   }
 });
+
+test('share image is set and served', async ({ page, request }) => {
+  const og = await page.locator('meta[property="og:image"]').getAttribute('content');
+  expect(og).toBe('https://raymond.sg/og.png');
+  expect((await request.get('/og.png')).status()).toBe(200);
+});

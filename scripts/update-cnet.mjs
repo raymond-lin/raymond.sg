@@ -1,14 +1,17 @@
 // Refreshes src/data/cnet.json from CNET Download: total downloads (product page) and
 // rank within the File Management category (category page). Run weekly by
-// .github/workflows/cnet-stats.yml, or locally with `npm run cnet`.
+// .github/workflows/stats.yml, or locally with `npm run cnet`.
 //
 // Rules:
 // - Downloads only ever go up; a lower or unparseable number is ignored.
 // - If the product is not found in the category list, categoryRank becomes null,
 //   which hides the "Top 3" badge on the site.
 // - If CNET blocks the request or the page layout changes, nothing is written and
-//   the workflow logs a warning, so the site keeps its last known values.
-import { readFile, writeFile } from 'node:fs/promises';
+//   the workflow logs a warning, so the site keeps its last known values. The workflow
+//   then opens (or comments on) the issue "Project stats need a look", and closes it after
+//   the next clean run.
+// - The Softpedia figure is entered by hand: Softpedia blocks automated visitors.
+import { appendFile, readFile, writeFile } from 'node:fs/promises';
 
 const FILE = new URL('../src/data/cnet.json', import.meta.url);
 const PRODUCT_ID = '10911445';
@@ -17,7 +20,11 @@ const HEADERS = {
   'accept-language': 'en-US,en;q=0.9',
 };
 
-const warn = (msg) => console.log(`::warning::${msg}`);
+const warnings = [];
+const warn = (msg) => {
+  warnings.push(`CNET: ${msg}`);
+  console.log(`::warning::CNET: ${msg}`);
+};
 
 async function get(url) {
   const res = await fetch(url, { headers: HEADERS, redirect: 'follow' });
@@ -73,4 +80,10 @@ if (changed) {
   console.log('Updated src/data/cnet.json');
 } else {
   console.log('No updates written.');
+}
+
+// In GitHub Actions, hand the warnings to the workflow, which opens an issue when there are any.
+if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `warnings=${warnings.length}\n`);
+if (process.env.RUNNER_TEMP && warnings.length) {
+  await appendFile(`${process.env.RUNNER_TEMP}/stats-warnings.md`, warnings.map((w) => `- ${w}`).join('\n') + '\n');
 }

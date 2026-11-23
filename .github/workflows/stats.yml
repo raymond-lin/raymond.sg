@@ -1,0 +1,78 @@
+name: Update project stats
+
+# Weekly refresh of the figures on the project cards:
+# - CNET downloads and category rank for MD5 & SHA Checksum Utility (src/data/cnet.json)
+# - Lyricsdecode's song count from its sitemap (src/data/lyricsdecode.json)
+# If anything goes wrong, opens (or comments on) the issue "Project stats need a look",
+# mentioning the owner so GitHub emails, and closes it after the next clean run.
+
+on:
+  schedule:
+    - cron: '17 1 * * 1' # Mondays 09:17 Singapore time
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+env:
+  ISSUE_TITLE: Project stats need a look
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - id: cnet
+        run: node scripts/update-cnet.mjs
+      - id: songs
+        if: success() || failure()
+        run: node scripts/update-lyricsdecode.mjs
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- src/data/cnet.json src/data/lyricsdecode.json; then
+            echo "No change to project stats."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/cnet.json src/data/lyricsdecode.json
+          git commit -m "chore: update project stats"
+          git push
+
+      # Something was blocked, changed or failed: open an issue (or add to the open one).
+      # The mention makes GitHub email the owner. The site keeps its last figures.
+      - name: Raise an issue
+        if: failure() || steps.cnet.outputs.warnings != '0' || steps.songs.outputs.warnings != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "@raymond-lin The weekly project stats update needs a look. The site keeps its last known figures until a run succeeds."
+            echo
+            if [ -s "$RUNNER_TEMP/stats-warnings.md" ]; then cat "$RUNNER_TEMP/stats-warnings.md"; else echo "- The job failed before it could record what went wrong."; fi
+            echo
+            echo "Run log: $RUN_URL"
+            echo
+            echo "This issue closes itself after the next clean run."
+          } > "$RUNNER_TEMP/issue.md"
+          num=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body-file "$RUNNER_TEMP/issue.md"
+          else
+            gh issue create --title "$ISSUE_TITLE" --body-file "$RUNNER_TEMP/issue.md"
+          fi
+
+      - name: Close the issue after a clean run
+        if: success() && steps.cnet.outputs.warnings == '0' && steps.songs.outputs.warnings == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          num=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue close "$num" --comment "This week's run worked, so the project stats are up to date again."
+          fi
