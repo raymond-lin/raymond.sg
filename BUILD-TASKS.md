@@ -51,7 +51,7 @@ More screenshots per project, for the case study pages (the home page cards keep
 - [ ] Email & Text Hash Generator: the Text panel and a sample input and output (both already on the WordPress download page).
 
 ## Next
-- [ ] First run of "Update project stats" from the Actions tab (CNET downloads and rank, Lyricsdecode song count). CNET refused automated requests when tested from a cloud server (Fastly "412"), so GitHub may be blocked too. If it is, the workflow opens the issue "Project stats need a look" and mentions you, so GitHub emails you; the site keeps its last figures. The Softpedia figure in `src/data/cnet.json` is updated by hand (Softpedia blocks bots).
+- [ ] First run of "Update project stats" from the Actions tab (CNET downloads and rank, Lyricsdecode song count). CNET refused automated requests when tested from a cloud server (Fastly "412"), so GitHub may be blocked too. If it is, the workflow opens the issue "Project stats need a look" and mentions you, so GitHub emails you; the site keeps its last figures. The Softpedia figure in `src/data/cnet.json` is updated by hand (Softpedia blocks bots); the issue "Update download figures" reminds you every three months. If CNET is blocked every week, turn off its step in `stats.yml` and update it with Softpedia from that reminder.
 - [ ] 9toFIRE case study page at `/projects/9tofire/` (Problem, My role, Stack, One hard technical decision, Result, Screenshots, Links), then link it from the card
 - [ ] raym0nd.com redirect: keep the Pro purchase pages working before redirecting anything
 
