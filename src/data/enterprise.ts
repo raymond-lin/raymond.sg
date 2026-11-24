@@ -15,9 +15,9 @@ export const enterprise: EnterpriseItem[] = [
     category: 'DevOps',
     title: 'Source control and CI/CD for business systems',
     summary:
-      'Salesforce and Business Central code brought into GitLab, with approval-gated CI/CD pipelines, basic SAST and DAST using open-source tools, and every change linked to its request in Jira Service Management.',
-    role: 'Set up GitLab, access and licensing, moved the code over, linked it to Jira Service Management, and set the pipeline standards the vendor follows',
-    tools: 'GitLab · CI/CD · SAST/DAST · Jira Service Management',
+      'Salesforce and Business Central code in GitLab, with approval-gated CI/CD, basic security scans and every change linked to Jira Service Management.',
+    role: 'Set up GitLab and the Jira link, and set the pipeline standards the vendor follows',
+    tools: 'GitLab · CI/CD · SAST/DAST',
   },
   {
     category: 'E-commerce',

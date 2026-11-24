@@ -1,9 +1,9 @@
 ---
 title: 9toFIRE
-order: 1
+order: 3
 category: Calculator
 platform: Web app
-summary: "A Singapore FIRE calculator that knows the local rules (CPF, HDB and income tax) and runs 1,000 market simulations in the browser, not on a server."
+summary: "A Singapore FIRE calculator that knows the local rules (CPF, HDB and income tax) and shows when work could become optional. It runs 1,000 market simulations in the browser, and plans never leave your device."
 specs:
   - { label: Rules, value: "CPF · HDB · income tax" }
   - { label: Quality, value: "Vitest + Playwright in GitHub Actions" }

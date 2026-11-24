@@ -15,7 +15,7 @@
   .card-meta { @apply flex items-center justify-between gap-3 text-xs uppercase tracking-editorial muted mb-4; }
   .work-title { @apply text-2xl sm:text-3xl font-semibold tracking-tight mb-3; }
   .work-desc { @apply text-sm muted leading-relaxed mb-6; }
-  .spec { @apply space-y-2 py-3 border-y border-monolith-line dark:border-monolith-darkLine text-sm; }
+  .spec { @apply space-y-2 pt-3 border-t border-monolith-line dark:border-monolith-darkLine text-sm; }
   .spec > div { @apply flex justify-between items-baseline gap-4; }
   .spec dt { @apply muted shrink-0; }
   .spec dd { @apply font-medium text-right; }
