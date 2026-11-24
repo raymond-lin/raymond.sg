@@ -6,7 +6,7 @@ export const site = {
   title: 'Raymond Lin, Solutions Architect & Full-stack Engineer',
   description:
     'Raymond Lin, Singapore. Enterprise platforms and vendor teams across Asia-Pacific, plus web apps, browser extensions and Windows tools he builds and runs himself.',
-  ogDescription: 'I deliver enterprise systems across APAC and build my own software.',
+  ogDescription: 'I deliver enterprise systems and build my own software.',
 };
 
 /** Round a count down to a figure that stays true as it grows: 836,024 -> "800,000+". */
