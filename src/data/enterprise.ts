@@ -15,16 +15,16 @@ export const enterprise: EnterpriseItem[] = [
     category: 'DevOps',
     title: 'Source control and CI/CD for business systems',
     summary:
-      'Salesforce and Business Central code brought into GitLab, with approval-gated CI/CD pipelines, basic SAST and DAST using open-source tools, and every change linked to Jira.',
-    role: 'Set up GitLab, access and licensing, moved the code over, linked Jira, and set the pipeline standards the vendor follows',
-    tools: 'GitLab · CI/CD · SAST/DAST · Jira',
+      'Salesforce and Business Central code in GitLab, with approval-gated CI/CD, basic security scans and every change linked to Jira Service Management.',
+    role: 'Set up GitLab and the Jira link, and set the pipeline standards the vendor follows',
+    tools: 'GitLab · CI/CD · SAST/DAST',
   },
   {
     category: 'E-commerce',
-    title: 'Moving a regional online store to a new platform',
+    title: 'Moving an online store to a new platform',
     summary:
-      'A direct-to-consumer store for five Asia-Pacific markets, moved from SAP Commerce Cloud to Shopline with its integrations redesigned.',
-    role: 'Set up SAP Commerce with the vendor, then led the migration',
+      'A direct-to-consumer store moved from SAP Commerce Cloud to Shopline, with its integrations redesigned.',
+    role: 'Led the migration from SAP Commerce Cloud to Shopline, working with the vendor',
     tools: 'SAP Commerce Cloud → Shopline',
   },
   {
@@ -37,15 +37,15 @@ export const enterprise: EnterpriseItem[] = [
   },
   {
     category: 'Security',
-    title: 'Keeping regional sites up and safe',
-    summary: 'Domains, DNS, SSL certificates and WAF rules across regional sites, plus API and payment gateway reviews.',
-    role: 'Owned operations and reviews',
-    tools: 'DNS · SSL/TLS · WAF · PCI · PDPA',
+    title: 'Keeping regional sites secure',
+    summary: 'Regular app and platform security scans across regional sites, with WAF rules, SSL certificates and secure payment integrations.',
+    role: 'Ran the scans and worked with vendors and teams to fix what they found',
+    tools: 'Security scans · WAF · SSL/TLS · PCI DSS',
   },
   {
     category: 'Analytics',
     title: 'One way to measure every market',
-    summary: 'The same tracking setup on every regional site, so traffic and conversions compare like for like across markets.',
+    summary: 'The same tracking setup on every regional site, so every market measures traffic and conversions the same way.',
     role: 'Defined the standard and rolled it out',
     tools: 'GA4 · GTM · Search Console · Clarity',
   },

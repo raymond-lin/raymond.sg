@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 
 test('home page renders the key sections', async ({ page }) => {
   await expect(page).toHaveTitle(/Raymond Lin/);
-  await expect(page.locator('h1')).toContainText('I deliver enterprise systems across APAC');
+  await expect(page.locator('h1')).toContainText('I deliver enterprise systems and build my own software');
   for (const id of ['enterprise', 'projects', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
   await expect(page.locator('article.work-card')).toHaveCount(6);
 });
@@ -34,6 +34,14 @@ test('content rules: no em or en dashes in visible text', async ({ page }) => {
   for (const path of ['/', '/privacy/']) {
     await page.goto(path);
     expect(await page.locator('body').innerText(), path).not.toMatch(/[—–]/);
+  }
+});
+
+test('content rules: no contractions in visible text', async ({ page }) => {
+  for (const path of ['/', '/privacy/', '/404']) {
+    await page.goto(path);
+    const text = (await page.locator('body').innerText()).replace(/[‘’]/g, "'");
+    expect(text, path).not.toMatch(/\b(I've|I'm|I'd|I'll|don't|doesn't|didn't|can't|won't|isn't|aren't|hasn't|haven't|wouldn't|couldn't|shouldn't|you're|you've|you'll|let's|it's|that's|there's|we're|they're)\b/i);
   }
 });
 

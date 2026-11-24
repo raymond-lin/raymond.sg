@@ -1,6 +1,6 @@
 ---
 title: Lyricsdecode
-order: 3
+order: 2
 category: Content site
 platform: Website
 summary: "Asian pop lyrics explained line by line, with romanisation and English meaning, across Mandopop, Cantopop, K-pop, J-pop and Hokkien pop, plus a lyrics quiz."
@@ -8,6 +8,7 @@ songCount: true # "400+ songs explained", from src/data/lyricsdecode.json (refre
 specs:
   - { label: Content, value: MDX }
   - { label: Hosting, value: Vercel }
+  - { label: Extras, value: "Quiz · Simplified/Traditional" }
 stackLine: "Next.js · MDX · Vercel"
 screenshot: ../../assets/projects/lyricsdecode.png
 screenshotDark: ../../assets/projects/lyricsdecode-dark.png

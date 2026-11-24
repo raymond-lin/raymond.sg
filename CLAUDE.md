@@ -27,6 +27,7 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 
 ## Content rules (from Raymond; keep these)
 - No em dashes or en dashes in any visible text. Use commas, colons, full stops or parentheses. A test enforces this.
+- No contractions in visible text: "I have", "does not", "cannot", not "I've", "doesn't", "can't". A test enforces this.
 - Do not name employers or describe work history. Talk about technology, platforms and projects instead.
 - No figures that go stale: no "16+ years", no years of experience, no "currently". Counts are rounded-down floors that stay true as they grow ("800,000+", "120,000+").
 - No job-hunting status ("open to roles"), no citizenship or work-pass details, no LinkedIn or GitHub links. Email is the only contact.
