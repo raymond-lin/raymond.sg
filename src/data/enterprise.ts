@@ -37,10 +37,10 @@ export const enterprise: EnterpriseItem[] = [
   },
   {
     category: 'Security',
-    title: 'Keeping regional sites up and safe',
-    summary: 'Regular app and platform security scans across regional sites, plus domains, DNS, SSL certificates, WAF rules and payment gateway reviews.',
-    role: 'Ran the scans and reviews, and worked with vendors and teams to fix the vulnerabilities they found',
-    tools: 'DNS · SSL/TLS · WAF · PCI · PDPA',
+    title: 'Keeping regional sites secure',
+    summary: 'Regular app and platform security scans across regional sites, with WAF rules, SSL certificates and secure payment integrations.',
+    role: 'Ran the scans and worked with vendors and teams to fix what they found',
+    tools: 'Security scans · WAF · SSL/TLS · PCI DSS',
   },
   {
     category: 'Analytics',
