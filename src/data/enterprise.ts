@@ -24,7 +24,7 @@ export const enterprise: EnterpriseItem[] = [
     title: 'Moving an online store to a new platform',
     summary:
       'A direct-to-consumer store moved from SAP Commerce Cloud to Shopline, with its integrations redesigned.',
-    role: 'Set up SAP Commerce with the vendor, then led the migration',
+    role: 'Led the migration from SAP Commerce Cloud to Shopline, working with the vendor',
     tools: 'SAP Commerce Cloud → Shopline',
   },
   {
@@ -38,14 +38,14 @@ export const enterprise: EnterpriseItem[] = [
   {
     category: 'Security',
     title: 'Keeping regional sites up and safe',
-    summary: 'Domains, DNS, SSL certificates and WAF rules across regional sites, plus API and payment gateway reviews.',
-    role: 'Owned operations and reviews',
+    summary: 'Regular app and platform security scans across regional sites, plus domains, DNS, SSL certificates, WAF rules and payment gateway reviews.',
+    role: 'Ran the scans and reviews, and worked with vendors and teams to fix the vulnerabilities they found',
     tools: 'DNS · SSL/TLS · WAF · PCI · PDPA',
   },
   {
     category: 'Analytics',
     title: 'One way to measure every market',
-    summary: 'The same tracking setup on every regional site, so traffic and conversions compare like for like across markets.',
+    summary: 'The same tracking setup on every regional site, so every market measures traffic and conversions the same way.',
     role: 'Defined the standard and rolled it out',
     tools: 'GA4 · GTM · Search Console · Clarity',
   },
