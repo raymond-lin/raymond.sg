@@ -21,9 +21,9 @@ export const enterprise: EnterpriseItem[] = [
   },
   {
     category: 'E-commerce',
-    title: 'Moving a regional online store to a new platform',
+    title: 'Moving an online store to a new platform',
     summary:
-      'A direct-to-consumer store for five Asia-Pacific markets, moved from SAP Commerce Cloud to Shopline with its integrations redesigned.',
+      'A direct-to-consumer store on SAP Commerce Cloud, with one market moved to Shopline and its integrations redesigned.',
     role: 'Set up SAP Commerce with the vendor, then led the migration',
     tools: 'SAP Commerce Cloud → Shopline',
   },
