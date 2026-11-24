@@ -51,9 +51,9 @@ export const enterprise: EnterpriseItem[] = [
   },
   {
     category: 'CRM',
-    title: 'Taking Salesforce live',
-    summary: 'A Salesforce rollout taken through go-live with the business teams and the implementation partner.',
-    role: 'Supported the project through go-live',
+    title: 'Taking Salesforce live, then improving it',
+    summary: 'A Salesforce rollout taken through go-live with the business teams and the implementation partner, then supported with fixes and enhancements.',
+    role: 'Supported go-live, then handled bug fixes, enhancements and change requests',
     tools: 'Salesforce',
   },
 ];
