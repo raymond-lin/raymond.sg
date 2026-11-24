@@ -36,7 +36,7 @@ jobs:
             echo "|---|---|---|"
             echo "| CNET total downloads | $(jq -r '.cnetTotalDownloads' $f) | $(jq -r '.productUrl' $f) (\"Total Downloads\") |"
             echo "| CNET rank in $(jq -r '.categoryName' $f) | $(jq -r '.categoryRank // "not in top list"' $f) | $(jq -r '.categoryUrl' $f) |"
-            echo "| Softpedia downloads | $(jq -r '.softpediaDownloads' $f) | https://www.softpedia.com/dyn-search.php?search_term=MD5+SHA+Checksum+Utility |"
+            echo "| Softpedia downloads | $(jq -r '.softpediaDownloads' $f) | $(jq -r '.softpediaUrl' $f) (the mobile page shows the total; the desktop page may not) |"
             echo
             echo "CNET figures last checked: $(jq -r '.lastChecked' $f)"
             echo

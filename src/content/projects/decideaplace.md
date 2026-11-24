@@ -3,7 +3,7 @@ title: Decide A Place
 order: 5
 category: Place finder
 platform: Web app
-summary: "Finds top-rated food spots, cafés, bars, shops, parks and attractions anywhere, with filters for price and rating, and picks one at random when you can't decide."
+summary: "Finds top-rated food spots, cafés, bars, shops, parks and attractions anywhere, with filters for price and rating, and picks one at random when you cannot decide."
 specs:
   - { label: Maps, value: Google Maps API }
   - { label: Framework, value: "React · Vite" }
