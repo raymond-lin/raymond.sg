@@ -80,7 +80,7 @@ test('logo scrolls to top without leaving a hash in the URL', async ({ page }) =
 });
 
 test('project screenshots follow the theme', async ({ page }) => {
-  const card = page.locator('article.work-card', { hasText: 'Lyricsdecode' });
+  const card = page.locator('article.work-card', { hasText: 'Lyrics Decode' });
   for (const scheme of ['light', 'dark'] as const) {
     await page.emulateMedia({ colorScheme: scheme });
     await page.evaluate(() => { try { localStorage.removeItem('theme'); } catch {} });

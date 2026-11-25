@@ -1,5 +1,5 @@
 ---
-title: Lyricsdecode
+title: Lyrics Decode
 order: 2
 category: Content site
 platform: Website
@@ -12,6 +12,6 @@ specs:
 stackLine: "Next.js · MDX · Vercel"
 screenshot: ../../assets/projects/lyricsdecode.png
 screenshotDark: ../../assets/projects/lyricsdecode-dark.png
-screenshotAlt: "Lyricsdecode home page listing the latest song explainers"
+screenshotAlt: "Lyrics Decode home page listing the latest song explainers"
 link: { label: Visit, href: "https://lyricsdecode.com/" }
 ---

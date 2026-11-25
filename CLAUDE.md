@@ -19,7 +19,7 @@ Personal site for Raymond Lin (Singapore). Static Astro site: one home page toda
 - Site name, email, helpers (`floorLabel`, `shortDate`): `src/data/site.ts`
 - Live figures on project cards, refreshed every Monday by `.github/workflows/stats.yml` (opens the issue "Project stats need a look" when something is blocked or changes, closes it after a clean run):
   - MD5 & SHA Checksum Utility: `src/data/cnet.json` (CNET downloads and rank; the Softpedia figure there is updated by hand). `.github/workflows/figures-reminder.yml` opens the issue "Update download figures" on the first of every month as a reminder.
-  - Lyricsdecode: `src/data/lyricsdecode.json` (song pages in its sitemap, shown as "400+ songs explained" with a Last checked date)
+  - Lyrics Decode: `src/data/lyricsdecode.json` (song pages in its sitemap, shown as "400+ songs explained" with a Last checked date)
 - Styles: Tailwind 3 (`tailwind.config.cjs`) plus component classes in `src/styles/global.css` (`.muted`, `.accent-text`, `.eyebrow`, `.work-card`, `.chip`, ...)
 - Hosting: Cloudflare Worker `raymond-sg`, connected to GitHub; every push to `main` deploys, other branches get preview links. Config in `wrangler.jsonc` (see README)
 - Original design reference: `docs/design-reference.html`
