@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 
 test('home page renders the key sections', async ({ page }) => {
   await expect(page).toHaveTitle(/Raymond Lin/);
-  await expect(page.locator('h1')).toContainText('I set up business systems end to end and build my own software');
+  await expect(page.locator('h1')).toContainText('I deliver enterprise systems and build my own software');
   for (const id of ['enterprise', 'projects', 'tools', 'contact']) await expect(page.locator(`#${id}`)).toBeAttached();
   await expect(page.locator('article.work-card')).toHaveCount(6);
 });

@@ -9,7 +9,7 @@ import { enterprise } from '../data/enterprise';
     </div>
     <p class="text-xs uppercase tracking-editorial muted">Across Asia-Pacific markets</p>
   </div>
-  <ol class="grid grid-cols-1 md:grid-cols-2 gap-px bg-monolith-line dark:bg-monolith-darkLine border border-monolith-line dark:border-monolith-darkLine rounded-sm overflow-hidden">
+  <ol class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-monolith-line dark:bg-monolith-darkLine border border-monolith-line dark:border-monolith-darkLine rounded-sm overflow-hidden">
     {enterprise.map((e, i) => (
       <li class="bg-monolith-card dark:bg-monolith-darkCard p-7 flex flex-col gap-2.5">
         <p class="eyebrow">{String(i + 1).padStart(2, '0')} / {e.category}</p>

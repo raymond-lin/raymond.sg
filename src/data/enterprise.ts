@@ -1,10 +1,6 @@
-// Enterprise work: things delivered for organisations. No employer names, no dates, no counts of
-// users, countries or markets, no cost figures, nothing about managing people or projects.
-// The site is aimed at hands-on roles (full-stack, configuring IT solutions end to end), so lead
-// with what Raymond set up, configured or fixed. Working with vendors is fine to mention.
-// `role` is what Raymond actually did (credit vendors and partners for their part),
+// Enterprise work: things delivered for organisations, one card each. No employer names, no dates.
+// Keep every line factual: `role` is what Raymond actually did (credit vendors for their part),
 // `tools` is a short line of what was used. The full tool list lives in src/data/tools.ts.
-// Four cards fill the two-column grid; add a fifth only with a sixth, or the grid ends on a lone card.
 // Order: strongest and most recent first; supporting roles last.
 export interface EnterpriseItem {
   category: string;
@@ -16,35 +12,48 @@ export interface EnterpriseItem {
 
 export const enterprise: EnterpriseItem[] = [
   {
-    category: 'ITSM · DevOps',
-    title: 'From request to release for business systems',
+    category: 'DevOps',
+    title: 'Source control and CI/CD for business systems',
     summary:
-      'Users, agents and vendors raise issues, change and service requests in Jira Service Management. Salesforce and Business Central changes then go through GitLab, with approval-gated CI/CD and basic security scans, each linked to its request.',
-    role: 'Set up Jira Service Management end to end and GitLab with its Jira link, and set the pipeline standards the vendor follows',
-    tools: 'Jira Service Management · GitLab CI/CD · SAST/DAST',
-  },
-  {
-    category: 'Security',
-    title: 'Finding and fixing vulnerabilities',
-    summary:
-      'Regular application and platform scans of Salesforce and every website my team looks after, backed by WAF rules and SSL certificates. Vulnerabilities and security incidents are followed from triage through to the fix.',
-    role: 'Ran the scans and handled vulnerability incidents, working with vendors and teams until each one was fixed',
-    tools: 'Security scans · WAF · SSL/TLS',
+      'Salesforce and Business Central code in GitLab, with approval-gated CI/CD, basic security scans and every change linked to Jira Service Management.',
+    role: 'Set up GitLab and the Jira link, and set the pipeline standards the vendor follows',
+    tools: 'GitLab · CI/CD · SAST/DAST',
   },
   {
     category: 'E-commerce',
     title: 'Moving an online store to a new platform',
     summary:
       'A direct-to-consumer store moved from SAP Commerce Cloud to Shopline, with its UI/UX and integrations redesigned.',
-    role: 'Led the migration, working with the vendor',
+    role: 'Led the migration from SAP Commerce Cloud to Shopline, working with the vendor',
     tools: 'SAP Commerce Cloud → Shopline',
+  },
+  {
+    category: 'ITSM',
+    title: 'A service desk for business systems',
+    summary:
+      'Jira Service Management for users to report system issues and raise change and service requests, and for agents to work them.',
+    role: 'Set up end to end',
+    tools: 'Jira Service Management',
+  },
+  {
+    category: 'Security',
+    title: 'Keeping regional sites secure',
+    summary: 'Regular application and platform security scans across regional sites, backed by WAF rules and SSL certificates.',
+    role: 'Ran the scans and worked with vendors and teams to fix what they found',
+    tools: 'Security scans · WAF · SSL/TLS',
+  },
+  {
+    category: 'Analytics',
+    title: 'One way to measure every market',
+    summary: 'The same tracking setup on every regional site, so every market measures traffic and conversions the same way.',
+    role: 'Defined the standard and rolled it out',
+    tools: 'GA4 · GTM · Search Console · Clarity',
   },
   {
     category: 'CRM',
     title: 'Taking Salesforce live, then improving it',
-    summary:
-      'Salesforce Service Cloud and Marketing Cloud taken through go-live with the business teams and the implementation partner, then improved with fixes and enhancements.',
-    role: 'Joined the project to help take it live, then handled bug fixes, enhancements and change requests',
-    tools: 'Service Cloud · Marketing Cloud',
+    summary: 'A Salesforce rollout taken through go-live with the business teams and the implementation partner, then supported with fixes and enhancements.',
+    role: 'Supported go-live, then handled bug fixes, enhancements and change requests',
+    tools: 'Salesforce',
   },
 ];
